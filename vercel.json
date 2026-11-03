@@ -1,0 +1,8 @@
+{
+  "version": 2,
+  "rewrites": [
+    { "source": "/", "destination": "/dashboard-admin-protowifi.html" },
+    { "source": "/dashboard", "destination": "/dashboard-admin-protowifi.html" }
+  ]
+}
+
