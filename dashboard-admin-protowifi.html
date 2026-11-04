@@ -1134,6 +1134,10 @@
       margin-left: 0 !important
     }
 
+    .main.guest-mode .menu-btn {
+      display: none !important
+    }
+
     .profile.guest-hidden {
       display: none !important
     }
@@ -1882,9 +1886,14 @@ th, label, .kpi-label, .fg-badge, .date-chip, .wizard-step, .mini-stat span, .pa
     </aside>
     <main class="main">
       <header class="topbar">
-        <div class="top-left"><button class="menu-btn" id="menuBtn" aria-label="Buka menu">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-        </button>
+        <div class="top-left">
+          <div class="guest-brand" id="guestBrand" style="display:none;align-items:center;gap:8px;font-weight:800;color:oklch(43% 0.2 262);font-size:15px;margin-right:12px">
+            <span style="background:linear-gradient(135deg,oklch(43% 0.2 262),oklch(52% 0.19 258));color:white;width:28px;height:28px;border-radius:8px;display:inline-grid;place-items:center;font-size:12px;font-weight:800">JC</span>
+            <span>JACNET</span>
+          </div>
+          <button class="menu-btn" id="menuBtn" aria-label="Buka menu">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          </button>
           <div class="crumb">Halaman / <strong>Dashboard</strong></div>
         </div>
         <div class="top-actions">
@@ -2266,10 +2275,10 @@ th, label, .kpi-label, .fg-badge, .date-chip, .wizard-step, .mini-stat span, .pa
       <h2 id="loginTitle">Login Administrator</h2>
       <form id="loginForm">
         <div class="login-field"><label for="adminEmail">Email / Nama Pengguna Admin</label><input id="adminEmail"
-            type="text" value="admin@jacnet.id" placeholder="admin@jacnet.id" autocomplete="username" required>
+            type="text" placeholder="admin@jacnet.id" autocomplete="username" required>
         </div>
         <div class="login-field"><label for="adminPassword">Kata Sandi</label>
-          <div class="password-wrap"><input id="adminPassword" type="password" value="admin123"
+          <div class="password-wrap"><input id="adminPassword" type="password"
               placeholder="Masukkan kata sandi" autocomplete="current-password" required><button type="button"
               class="toggle-password" id="togglePassword" aria-label="Tampilkan kata sandi"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
         </div>
@@ -2306,8 +2315,8 @@ th, label, .kpi-label, .fg-badge, .date-chip, .wizard-step, .mini-stat span, .pa
     </section>
   </div>
   <script>
-    // State autentikasi dan navigasi Admin
-    let adminLoggedIn = localStorage.getItem('jacnet_admin_logged_in') !== 'false' && localStorage.getItem('protowifi_admin_logged_in') !== 'false';
+    // State autentikasi dan navigasi Admin: Default FALSE (Mode Visitor) untuk tamu baru/incognito
+    let adminLoggedIn = localStorage.getItem('jacnet_admin_logged_in') === 'true' || localStorage.getItem('protowifi_admin_logged_in') === 'true';
     const sidebarEl = document.getElementById('sidebar');
     const mainEl = document.querySelector('.main');
     const profileEl = document.querySelector('.profile');
@@ -2324,6 +2333,8 @@ th, label, .kpi-label, .fg-badge, .date-chip, .wizard-step, .mini-stat span, .pa
       if (openLoginBtn) openLoginBtn.textContent = adminLoggedIn ? 'Admin Aktif' : 'Login Admin';
       const lockEl = document.getElementById('customerLock');
       if (lockEl) lockEl.textContent = adminLoggedIn ? '✓' : '✕';
+      const gb = document.getElementById('guestBrand');
+      if (gb) gb.style.display = adminLoggedIn ? 'none' : 'inline-flex';
     }
 
     function showDashboard() {
@@ -2344,6 +2355,7 @@ th, label, .kpi-label, .fg-badge, .date-chip, .wizard-step, .mini-stat span, .pa
     function showCustomerManagement() {
       if (!adminLoggedIn) {
         showToast('Silakan login admin untuk mengakses Manajemen Pelanggan');
+        showDashboard();
         openLogin();
         return;
       }
@@ -2814,7 +2826,13 @@ th, label, .kpi-label, .fg-badge, .date-chip, .wizard-step, .mini-stat span, .pa
         password = document.getElementById('adminPassword').value;
       const error = document.getElementById('loginError');
       if (!email || !password) {
-        error.textContent = 'Harap isi email dan password.';
+        error.textContent = 'Harap isi email dan kata sandi admin.';
+        error.classList.add('show');
+        return;
+      }
+      const validUsers = ['admin@jacnet.id', 'admin@protowifi.id', 'admin'];
+      if (!validUsers.includes(email.toLowerCase()) || password !== 'admin123') {
+        error.textContent = 'Email atau kata sandi admin salah.';
         error.classList.add('show');
         return;
       }
@@ -3645,6 +3663,11 @@ th, label, .kpi-label, .fg-badge, .date-chip, .wizard-step, .mini-stat span, .pa
   </div>`;
     }
     function openCustomerCrud(mode, row = null) {
+      if (!adminLoggedIn) {
+        showToast('Akses ditolak: Silakan login admin terlebih dahulu.');
+        openLogin();
+        return;
+      }
       editingCustomerId = mode === 'edit' && row ? row[6] : null;
       crudWizardStep = 0; selectedPaymentYear = new Date().getFullYear(); selectedPaymentMonth = new Date().getMonth();
       const title = mode === 'edit' ? 'Edit Data Pelanggan' : 'Tambah Pelanggan';
@@ -3885,6 +3908,11 @@ th, label, .kpi-label, .fg-badge, .date-chip, .wizard-step, .mini-stat span, .pa
       }
     }
     function openDeleteCustomer(id) {
+      if (!adminLoggedIn) {
+        showToast('Akses ditolak: Silakan login admin terlebih dahulu.');
+        openLogin();
+        return;
+      }
       const row = customerRows.find(r => r[6] === id); if (!row) return;
       deletingCustomerId = id;
       document.getElementById('deleteCustomerMessage').textContent = `Pelanggan ${row[8]} (${row[6]}) beserta rekap pembayarannya akan dihapus. Tindakan ini tidak dapat dibatalkan.`;
@@ -3924,6 +3952,11 @@ th, label, .kpi-label, .fg-badge, .date-chip, .wizard-step, .mini-stat span, .pa
     function inlineDigits(v) { const d = String(v ?? '').replace(/[^\d]/g, ''); return d === '' ? '' : String(Number(d)); }
     function escHtmlInline(v) { return String(v ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
     function startInlineEdit(td) {
+      if (!adminLoggedIn) {
+        showToast('Akses ditolak: Silakan login admin untuk mengubah data.');
+        openLogin();
+        return;
+      }
       if (td.querySelector('input')) return;
       const id = td.dataset.rowId;
       const col = Number(td.dataset.inlineCol);
@@ -4121,6 +4154,11 @@ th, label, .kpi-label, .fg-badge, .date-chip, .wizard-step, .mini-stat span, .pa
     }
 
     function openDbConfig() {
+      if (!adminLoggedIn) {
+        showToast('Akses ditolak: Pengaturan database hanya untuk admin.');
+        openLogin();
+        return;
+      }
       gasApiUrlInput.value = gasApiUrl;
       dbSyncStatusMsg.style.display = 'none';
       dbConfigOverlay.classList.add('open');
