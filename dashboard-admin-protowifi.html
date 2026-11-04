@@ -1808,6 +1808,24 @@ th, label, .kpi-label, .fg-badge, .date-chip, .wizard-step, .mini-stat span, .pa
       .crumb { display: none; }
       .login-trigger { padding: 0 10px; }
     }
+    td.inline-editable { cursor: text; }
+    td.inline-editable:hover { box-shadow: inset 0 0 0 2px oklch(62% 0.14 258 / 0.55); }
+    .inline-edit-input { width: 100%; min-width: 90px; padding: 6px 8px; font: inherit; font-size: 12.5px; border: 1.5px solid oklch(52% 0.19 258); border-radius: 6px; background: #fff; color: inherit; box-sizing: border-box; }
+    .inline-edit-input:focus { outline: 2px solid oklch(80% 0.08 258); }
+    .inline-confirm-detail { background: oklch(96% 0.015 256); border: 1px solid oklch(88% 0.03 256); border-radius: 8px; padding: 10px 12px; font-size: 13px; text-align: left; margin: 10px 0 4px; word-break: break-word; }
+    .chooser-native { display: none !important; }
+    .chooser { position: relative; }
+    .chooser-btn { width: 100%; height: 40px; border: 1px solid var(--line); border-radius: 9px; padding: 0 11px; background: oklch(99.4% 0.003 250); color: oklch(21% 0.028 262); font: inherit; font-size: 13px; display: flex; align-items: center; justify-content: space-between; gap: 8px; cursor: pointer; text-align: left; }
+    .chooser-btn:focus { border-color: oklch(76% 0.13 254); box-shadow: 0 0 0 3px oklch(95% 0.028 256); outline: none; }
+    .chooser-btn span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .chooser-caret { flex: none; opacity: 0.65; }
+    .chooser-panel { position: absolute; top: calc(100% + 6px); left: 0; right: 0; min-width: 270px; background: #fff; border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 18px 40px rgba(15, 35, 80, 0.18); z-index: 300; padding: 8px; }
+    .chooser-search { width: 100%; height: 36px; border: 1px solid var(--line); border-radius: 8px; padding: 0 10px; font: inherit; font-size: 13px; box-sizing: border-box; }
+    .chooser-list { max-height: 272px; overflow-y: auto; margin-top: 6px; display: flex; flex-direction: column; gap: 2px; }
+    .chooser-item { border: 0; background: transparent; font: inherit; font-size: 13px; text-align: left; padding: 9px 10px; border-radius: 8px; cursor: pointer; color: inherit; }
+    .chooser-item:hover { background: oklch(95% 0.028 256); }
+    .chooser-item.active { background: oklch(90% 0.055 256); font-weight: 700; }
+    .chooser-empty { padding: 10px; font-size: 13px; color: oklch(50% 0.018 258); }
 </style>
   <!-- Leaflet.js Interactive GIS Map -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -1859,9 +1877,17 @@ th, label, .kpi-label, .fg-badge, .date-chip, .wizard-step, .mini-stat span, .pa
           <div class="date-chip" id="todayLabel">Memuat tanggal...</div>
         </div>
         <section class="panel filters" aria-label="Filter dashboard">
-          <div class="field"><label for="regionFilter">WILAYAH</label><select id="regionFilter">
+          <div class="field"><label>WILAYAH</label><select id="regionFilter" class="chooser-native" aria-hidden="true" tabindex="-1">
               <option value="all">Semua wilayah</option>
-            </select></div>
+            </select>
+            <div class="chooser" id="regionChooser">
+              <button type="button" class="chooser-btn" id="regionChooserBtn" aria-haspopup="listbox" aria-expanded="false"><span id="regionChooserText">Semua wilayah</span><svg class="chooser-caret" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              <div class="chooser-panel" id="regionChooserPanel" hidden>
+                <input type="text" class="chooser-search" id="regionChooserSearch" placeholder="Cari wilayah..." autocomplete="off">
+                <div class="chooser-list" id="regionChooserList" role="listbox" aria-label="Pilih wilayah"></div>
+              </div>
+            </div>
+          </div>
           <div class="field"><label for="dateFilter">PERIODE</label><select id="dateFilter">
               <option value="all">Semua periode</option>
               <option value="month">Bulan terkini</option>
@@ -2191,6 +2217,17 @@ th, label, .kpi-label, .fg-badge, .date-chip, .wizard-step, .mini-stat span, .pa
       <div class="delete-actions"><button type="button" class="btn btn-light"
           id="cancelDeleteCustomer">Batal</button><button type="button" class="btn btn-danger"
           id="confirmDeleteCustomer">Ya, Hapus</button></div>
+    </section>
+  </div>
+
+
+  <div class="crud-overlay" id="inlineConfirmOverlay" aria-hidden="true">
+    <section class="delete-modal" role="dialog" aria-modal="true" aria-labelledby="inlineConfirmTitle">
+      <h2 id="inlineConfirmTitle">Simpan perubahan?</h2>
+      <p id="inlineConfirmMessage">Perubahan akan disimpan.</p>
+      <div class="delete-actions"><button type="button" class="btn btn-light"
+          id="cancelInlineConfirm">Batal</button><button type="button" class="btn btn-primary"
+          id="confirmInlineSave">Ya, Simpan</button></div>
     </section>
   </div>
 
@@ -2696,6 +2733,7 @@ th, label, .kpi-label, .fg-badge, .date-chip, .wizard-step, .mini-stat span, .pa
         if (el) el.value = 'all';
       });
       document.getElementById('searchInput').value = '';
+      if (typeof syncRegionChooserLabel === 'function') syncRegionChooserLabel();
       if (typeof mapClusterInstance !== 'undefined' && mapClusterInstance) {
         mapClusterInstance.setView([-6.9570, 107.8271], 12, { animate: true });
       }
@@ -2735,7 +2773,7 @@ th, label, .kpi-label, .fg-badge, .date-chip, .wizard-step, .mini-stat span, .pa
     document.getElementById('openLogin').onclick = openLogin;
     document.getElementById('closeLogin').onclick = closeLogin;
     loginOverlay.addEventListener('click', e => { if (e.target === loginOverlay) closeLogin() });
-    document.addEventListener('keydown', e => { if (e.key !== 'Escape') return; const cp = document.getElementById('coordPickerOverlay'); if (cp && cp.classList.contains('open')) { if (typeof closeCoordPicker === 'function') closeCoordPicker(); return; } closeLogin(); if (typeof closeCustomerCrud === 'function') closeCustomerCrud(); if (typeof closeDeleteCustomer === 'function') closeDeleteCustomer(); if (typeof closeDbConfig === 'function') closeDbConfig(); });
+    document.addEventListener('keydown', e => { if (e.key !== 'Escape') return; const cp = document.getElementById('coordPickerOverlay'); if (cp && cp.classList.contains('open')) { if (typeof closeCoordPicker === 'function') closeCoordPicker(); return; } closeLogin(); if (typeof closeCustomerCrud === 'function') closeCustomerCrud(); if (typeof closeDeleteCustomer === 'function') closeDeleteCustomer(); if (typeof closeDbConfig === 'function') closeDbConfig(); if (typeof closeInlineConfirm === 'function') closeInlineConfirm(); });
     document.getElementById('togglePassword').onclick = () => { const field = document.getElementById('adminPassword'); field.type = field.type === 'password' ? 'text' : 'password' };
     document.getElementById('loginForm').onsubmit = e => {
       e.preventDefault();
@@ -2836,16 +2874,17 @@ th, label, .kpi-label, .fg-badge, .date-chip, .wizard-step, .mini-stat span, .pa
         return '<tr>' + combined.map((v, i) => {
           if (i === 41) return ''; // Kolom Biaya Registrasi dihapus dari tampilan (kosong di semua data)
           if (i >= 50) {
-            if (!v) return '<td class="payment-cell"><span class="empty-tag">Belum ditagihkan</span></td>';
+            if (!v) return '<td class="payment-cell inline-editable" data-inline-col="' + i + '" data-row-id="' + String(row[6]).replace(/"/g, '&quot;') + '" data-month="' + paymentPeriods[i - 50].month + '" data-year="' + paymentPeriods[i - 50].year + '"><span class="empty-tag">Belum ditagihkan</span></td>';
             const money = n => 'Rp ' + Number(n).toLocaleString('id-ID');
             const tag = v.status === 'Lunas' ? 'paid-tag' : v.status === 'Belum Lunas' ? 'partial-tag' : 'unpaid-tag';
             const title = `${v.year || new Date().getFullYear()} · Dibayar ${money(v.paid)} dari ${money(v.due)} · ${v.status}`;
-            return `<td class="payment-cell" title="${title}"><strong>${money(v.paid)}</strong><small class="${tag}">${v.status}${v.status === 'Belum Lunas' ? ' · Sisa ' + money(v.due - v.paid) : ''}</small></td>`;
+            return `<td class="payment-cell inline-editable" data-inline-col="${i}" data-row-id="${String(row[6]).replace(/"/g, '&quot;')}" data-month="${paymentPeriods[i - 50].month}" data-year="${paymentPeriods[i - 50].year}" title="${title}"><strong>${money(v.paid)}</strong><small class="${tag}">${v.status}${v.status === 'Belum Lunas' ? ' · Sisa ' + money(v.due - v.paid) : ''}</small></td>`;
           }
           const safe = String(v ?? '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
           const isStatus = i === 22 || i === 23;
           const cls = v === 'Lunas' || v === 'Aktif' || v === 'Perangkat Sudah Diambil' ? 'paid' : v === 'Freeze' || v === 'Perangkat Belum Diambil' ? 'pending' : (v === 'Churn' || v === 'Dismantle' || v === 'Belum Lunas') ? 'failed' : '';
-          return '<td title="' + safe + '">' + (isStatus ? '<span class="status ' + cls + '">' + (safe || '—') + '</span>' : (safe || '—')) + '</td>';
+          const inlineAttrs = [0, 1, 2, 3, 4, 6].includes(i) ? '' : ' class="inline-editable" data-inline-col="' + i + '" data-row-id="' + String(row[6]).replace(/"/g, '&quot;') + '"';
+          return '<td title="' + safe + '"' + inlineAttrs + '>' + (isStatus ? '<span class="status ' + cls + '">' + (safe || '—') + '</span>' : (safe || '—')) + '</td>';
         }).join('') + '<td class="action-cell"><div class="customer-row-actions"><button type="button" class="edit-row" data-edit-customer="' + String(row[6]).replace(/"/g, '&quot;') + '">Edit</button><button type="button" class="delete-row" data-delete-customer="' + String(row[6]).replace(/"/g, '&quot;') + '">Hapus</button></div></td></tr>';
       }).join('') : '<tr><td class="empty" colspan="' + (49 + paymentPeriods.length + 1) + '">Tidak ada data pelanggan yang cocok dengan filter.</td></tr>';
       const pages = Math.max(1, Math.ceil(customerFiltered.length / size) || 1);
@@ -3405,6 +3444,49 @@ th, label, .kpi-label, .fg-badge, .date-chip, .wizard-step, .mini-stat span, .pa
     // ===== CRUD pelanggan: Create, Read, Update, Delete =====
     const CRUD_STORAGE_KEY = 'jacnet_customer_crud_v1';
     let editingCustomerId = null, deletingCustomerId = null;
+    // ===== Draft sesi tambah/edit: tersimpan otomatis di browser =====
+    // Kalau halaman termuat ulang / koneksi terputus di tengah pengisian (reconnect),
+    // sesi terakhir dipulihkan persis seperti ditinggalkan - tidak perlu mengisi dari awal.
+    const CRUD_DRAFT_KEY = 'jacnet_crud_draft_v1';
+    let crudDraftSaveTimer = null;
+    function collectCrudDraft() {
+      const overlay = document.getElementById('customerCrudOverlay');
+      if (!overlay || !overlay.classList.contains('open')) return null;
+      const values = {};
+      document.querySelectorAll('#customerCrudFields [id^="crud_"]').forEach(el => { values[el.id] = el.value; });
+      ['addressProvince', 'addressCity', 'addressDistrict', 'addressRT', 'addressPostal'].forEach(id => { const el = document.getElementById(id); if (el) values[id] = el.value; });
+      const paidEl = document.getElementById('selectedPaid');
+      return { mode: editingCustomerId ? 'edit' : 'create', editingId: editingCustomerId, step: crudWizardStep, payYear: selectedPaymentYear, payMonth: selectedPaymentMonth, paid: paidEl ? paidEl.value : '', open: true, values, ts: Date.now() };
+    }
+    function saveCrudDraft() {
+      const d = collectCrudDraft();
+      if (d) { try { localStorage.setItem(CRUD_DRAFT_KEY, JSON.stringify(d)); } catch (err) { /* abaikan */ } }
+    }
+    function scheduleCrudDraftSave() { clearTimeout(crudDraftSaveTimer); crudDraftSaveTimer = setTimeout(saveCrudDraft, 300); }
+    function loadCrudDraft() { try { return JSON.parse(localStorage.getItem(CRUD_DRAFT_KEY) || 'null'); } catch (err) { return null; } }
+    function clearCrudDraft() { try { localStorage.removeItem(CRUD_DRAFT_KEY); } catch (err) { /* abaikan */ } }
+    function markCrudDraftClosed() {
+      const d = loadCrudDraft();
+      if (d) { d.open = false; try { localStorage.setItem(CRUD_DRAFT_KEY, JSON.stringify(d)); } catch (err) { /* abaikan */ } }
+    }
+    function maybeRestoreCrudDraft(mode) {
+      const d = loadCrudDraft();
+      if (!d || !d.values) return;
+      const isEdit = mode === 'edit';
+      if (isEdit !== (d.mode === 'edit')) return;
+      if (isEdit && d.editingId !== editingCustomerId) return;
+      Object.entries(d.values).forEach(([id, val]) => { const el = document.getElementById(id); if (el) el.value = val; });
+      if (typeof d.payYear === 'number') selectedPaymentYear = d.payYear;
+      if (typeof d.payMonth === 'number') selectedPaymentMonth = d.payMonth;
+      crudWizardStep = Math.min(5, Math.max(0, Number(d.step) || 0));
+      renderCrudWizard();
+      const paidEl = document.getElementById('selectedPaid');
+      if (paidEl && d.paid !== undefined && d.paid !== '') paidEl.value = d.paid;
+      syncDerivedDateFields();
+      showToast('Sesi ' + (isEdit ? 'edit' : 'tambah') + ' terakhir dipulihkan - lanjutkan pengisian, belum tersimpan ke Google Sheet.');
+    }
+    document.getElementById('customerCrudForm').addEventListener('input', scheduleCrudDraftSave);
+    document.getElementById('customerCrudForm').addEventListener('change', scheduleCrudDraftSave);
     function persistCustomerData() {
       try {
         const payload = JSON.stringify({ customerRows, billingRows });
@@ -3607,6 +3689,7 @@ th, label, .kpi-label, .fg-badge, .date-chip, .wizard-step, .mini-stat span, .pa
       }
       renderCrudWizard();
       const overlay = document.getElementById('customerCrudOverlay'); overlay.classList.add('open'); overlay.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden';
+      maybeRestoreCrudDraft(mode);
     }
     function refreshPaymentEditor() {
       const bill = billingRows.find(x => x[2] === editingCustomerId);
@@ -3634,9 +3717,10 @@ th, label, .kpi-label, .fg-badge, .date-chip, .wizard-step, .mini-stat span, .pa
       }
       return true;
     }
-    document.getElementById('crudPrevStep').onclick = () => { crudWizardStep = Math.max(0, crudWizardStep - 1); renderCrudWizard() };
-    document.getElementById('crudNextStep').onclick = () => { if (!crudStepValid()) return; crudWizardStep = Math.min(5, crudWizardStep + 1); renderCrudWizard() };
+    document.getElementById('crudPrevStep').onclick = () => { crudWizardStep = Math.max(0, crudWizardStep - 1); renderCrudWizard(); saveCrudDraft(); };
+    document.getElementById('crudNextStep').onclick = () => { if (!crudStepValid()) return; crudWizardStep = Math.min(5, crudWizardStep + 1); renderCrudWizard(); saveCrudDraft(); };
     function closeCustomerCrud() {
+      markCrudDraftClosed();
       document.getElementById('customerCrudOverlay').classList.remove('open');
       document.getElementById('customerCrudOverlay').setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
@@ -3724,7 +3808,7 @@ th, label, .kpi-label, .fg-badge, .date-chip, .wizard-step, .mini-stat span, .pa
       }
       customerRows.forEach((r, index) => { r[0] = String(index + 1); });
       billingRows.forEach((b, index) => { b[0] = String(index + 1); });
-      persistCustomerData(); closeCustomerCrud(); applyCustomerFilters(); showToast(oldId ? 'Data pelanggan berhasil diperbarui.' : 'Pelanggan baru berhasil ditambahkan.');
+      persistCustomerData(); clearCrudDraft(); closeCustomerCrud(); applyCustomerFilters(); showToast(oldId ? 'Data pelanggan berhasil diperbarui.' : 'Pelanggan baru berhasil ditambahkan.');
       if (gasApiUrl) {
         showToast('Menyimpan ke Google Sheet...');
         fetch(gasApiUrl, {
@@ -3790,6 +3874,121 @@ th, label, .kpi-label, .fg-badge, .date-chip, .wizard-step, .mini-stat span, .pa
       const edit = e.target.closest('[data-edit-customer]'), del = e.target.closest('[data-delete-customer]');
       if (edit) { const row = customerRows.find(r => r[6] === edit.dataset.editCustomer); if (row) openCustomerCrud('edit', row); }
       if (del) openDeleteCustomer(del.dataset.deleteCustomer);
+    });
+
+    // ===== Edit langsung di tabel manajemen: klik sel -> ubah di tempat -> modal konfirmasi -> Google Sheet =====
+    let pendingInlineEdit = null;
+    const INLINE_LOCKED_COLS = [0, 1, 2, 3, 4, 6]; // NO, grup Tanggal SO, dan ID Pelanggan tidak diedit inline
+    function inlineDigits(v) { const d = String(v ?? '').replace(/[^\d]/g, ''); return d === '' ? '' : String(Number(d)); }
+    function escHtmlInline(v) { return String(v ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
+    function startInlineEdit(td) {
+      if (td.querySelector('input')) return;
+      const id = td.dataset.rowId;
+      const col = Number(td.dataset.inlineCol);
+      const row = customerRows.find(r => r[6] === id);
+      if (!row) { showToast('Data pelanggan tidak ditemukan.'); return; }
+      const bill = billingRows.find(b => b[2] === id) || null;
+      let curVal = '', inputType = 'text', colName = '';
+      if (col >= 50) {
+        const month = Number(td.dataset.month), year = Number(td.dataset.year);
+        const entry = bill ? bill[6 + month] : null;
+        if (entry && entry.year && Number(entry.year) !== year) { showToast('Periode ini tercatat untuk tahun ' + entry.year + ', bukan ' + year + '.'); return; }
+        if (entry && entry.status === 'Lunas') { showToast('Pembayaran periode ini sudah Lunas dan tidak dapat diinput ulang.'); return; }
+        curVal = entry ? String(entry.paid ?? 0) : '0';
+        inputType = 'number'; colName = 'Pembayaran ' + monthLabels[month] + ' ' + year;
+        pendingInlineEdit = { id, col, month, year, oldVal: curVal, colName };
+      } else {
+        if (INLINE_LOCKED_COLS.includes(col)) return;
+        colName = customerColumns[col];
+        if (col === 47) curVal = bill ? String(bill[3] ?? '') : String(row[14] ?? '');
+        else if (col === 48) curVal = bill ? String(bill[4] ?? '') : '';
+        else if (col === 49) { curVal = inlineDigits(row[42]); inputType = 'number'; }
+        else if (col === 42 || col === 43) { curVal = inlineDigits(row[col]); inputType = 'number'; }
+        else curVal = String(row[col] ?? '');
+        pendingInlineEdit = { id, col, oldVal: curVal, colName };
+      }
+      td.innerHTML = '';
+      const input = document.createElement('input');
+      input.type = inputType; input.className = 'inline-edit-input'; input.value = curVal;
+      if (inputType === 'number') input.min = '0';
+      td.appendChild(input);
+      input.focus(); input.select();
+      let finished = false;
+      const finish = save => {
+        if (finished) return; finished = true;
+        const newVal = input.value.trim();
+        if (!save || newVal === curVal) { pendingInlineEdit = null; renderCustomerTable(); return; }
+        pendingInlineEdit.newVal = newVal;
+        renderCustomerTable();
+        document.getElementById('inlineConfirmMessage').innerHTML = 'Pelanggan <b>' + escHtmlInline(row[8]) + '</b> (' + escHtmlInline(id) + ')<div class="inline-confirm-detail">' + escHtmlInline(colName) + ':<br>"' + escHtmlInline(curVal || '—') + '" &rarr; "' + escHtmlInline(newVal) + '"</div>Perubahan akan disimpan dan Google Sheet ikut terupdate.';
+        const ov = document.getElementById('inlineConfirmOverlay'); ov.classList.add('open'); ov.setAttribute('aria-hidden', 'false');
+      };
+      input.addEventListener('keydown', e => {
+        if (e.key === 'Enter') { e.preventDefault(); finish(true); }
+        else if (e.key === 'Escape') { e.preventDefault(); finish(false); }
+        e.stopPropagation();
+      });
+      input.addEventListener('blur', () => finish(true));
+      input.addEventListener('click', e => e.stopPropagation());
+    }
+    function closeInlineConfirm() {
+      const ov = document.getElementById('inlineConfirmOverlay');
+      if (ov) { ov.classList.remove('open'); ov.setAttribute('aria-hidden', 'true'); }
+      pendingInlineEdit = null;
+    }
+    document.getElementById('cancelInlineConfirm').onclick = closeInlineConfirm;
+    document.getElementById('inlineConfirmOverlay').addEventListener('click', e => { if (e.target.id === 'inlineConfirmOverlay') closeInlineConfirm(); });
+    document.getElementById('confirmInlineSave').onclick = () => {
+      const p = pendingInlineEdit; if (!p) return;
+      const row = customerRows.find(r => r[6] === p.id);
+      if (!row) { closeInlineConfirm(); showToast('Data pelanggan tidak ditemukan.'); return; }
+      let bill = billingRows.find(b => b[2] === p.id) || null;
+      const newVal = p.newVal;
+      if (p.col >= 50) {
+        const entry = bill ? bill[6 + p.month] : null;
+        const due = entry ? Number(entry.due || 0) : Number(bill ? bill[5] || 0 : 0);
+        const paid = Number(newVal);
+        if (isNaN(paid) || paid < 0) { closeInlineConfirm(); showToast('Nominal dibayar tidak valid.'); return; }
+        if (paid > due) { closeInlineConfirm(); showToast('Nominal dibayar tidak boleh melebihi nominal tagihan.'); return; }
+        const status = paid <= 0 ? 'Belum Bayar' : (due > 0 && paid >= due ? 'Lunas' : 'Belum Lunas');
+        if (!bill) { bill = [String(customerRows.length + 1), row[8], p.id, row[14] || '', 1, Number(row[42] || 0), ...Array(12).fill(null)]; billingRows.push(bill); }
+        bill[6 + p.month] = { paid, due, status, year: p.year };
+        persistCustomerData(); closeInlineConfirm(); refreshDashboardData();
+        showToast('Pembayaran ' + monthLabels[p.month] + ' ' + p.year + ' diperbarui.');
+        if (gasApiUrl) {
+          showToast('Menyimpan ke Google Sheet...');
+          fetch(gasApiUrl, { method: 'POST', body: JSON.stringify({ action: 'updatePayment', idPelanggan: p.id, monthIndex: p.month, paid, due, status }) })
+            .then(r => r.json()).then(res => { showToast(res.status === 'success' ? 'Pembayaran tersinkron ke Google Sheet.' : 'Peringatan Google Sheet: ' + (res.message || 'Gagal menyimpan')); })
+            .catch(() => showToast('Tersimpan di browser, tetapi gagal disinkronkan ke Google Sheet.'));
+        }
+        return;
+      }
+      if (p.col === 8 && !newVal) { closeInlineConfirm(); showToast('Nama Pelanggan wajib diisi.'); return; }
+      if ((p.col === 14 || p.col === 47) && !newVal) { closeInlineConfirm(); showToast('Nama Paket wajib diisi.'); return; }
+      if ((p.col === 42 || p.col === 49) && !(Number(newVal) > 0)) { closeInlineConfirm(); showToast('Harga Paket Normal wajib diisi lebih dari 0.'); return; }
+      if (p.col === 48 && !newVal) { closeInlineConfirm(); showToast('Jumlah User wajib diisi.'); return; }
+      const updated = row.slice();
+      if (p.col === 47) updated[14] = newVal;
+      else if (p.col === 49) updated[42] = newVal;
+      else if (p.col !== 48) updated[p.col] = newVal;
+      const ix = customerRows.findIndex(r => r[6] === p.id); customerRows[ix] = updated;
+      if (!bill) { bill = [String(customerRows.length + 1), updated[8], p.id, updated[14] || '', 1, Number(updated[42] || 0), ...Array(12).fill(null)]; billingRows.push(bill); }
+      bill[1] = updated[8]; bill[2] = p.id; bill[3] = updated[14] || '';
+      if (p.col === 48) bill[4] = newVal;
+      bill[5] = Number(updated[42] || updated[41] || 0);
+      persistCustomerData(); closeInlineConfirm(); refreshDashboardData();
+      showToast('Data pelanggan berhasil diperbarui.');
+      if (gasApiUrl) {
+        showToast('Menyimpan ke Google Sheet...');
+        fetch(gasApiUrl, { method: 'POST', body: JSON.stringify({ action: 'updateCustomer', client: updated, billing: { paket: bill[3], users: String(bill[4]), due: bill[5] } }) })
+          .then(r => r.json()).then(res => { showToast(res.status === 'success' ? 'Data berhasil disinkronkan ke Google Sheet.' : 'Peringatan Google Sheet: ' + (res.message || 'Gagal menyimpan')); })
+          .catch(() => showToast('Tersimpan di browser, tetapi gagal disinkronkan ke Google Sheet.'));
+      }
+    };
+    document.getElementById('customerTableBody').addEventListener('click', e => {
+      if (e.target.closest('button')) return;
+      const td = e.target.closest('td[data-inline-col]');
+      if (td) startInlineEdit(td);
     });
     document.getElementById('cancelDeleteCustomer').onclick = closeDeleteCustomer;
     document.getElementById('customerDeleteOverlay').addEventListener('click', e => { if (e.target.id === 'customerDeleteOverlay') closeDeleteCustomer() });
@@ -3950,8 +4149,63 @@ th, label, .kpi-label, .fg-badge, .date-chip, .wizard-step, .mini-stat span, .pa
       };
     }
 
+    // ===== Chooser wilayah dashboard: pilih satu wilayah dari panel (pengganti dropdown bawaan) =====
+    const regionChooserEl = document.getElementById('regionChooser');
+    const regionSelEl = document.getElementById('regionFilter');
+    const regionChooserBtn = document.getElementById('regionChooserBtn');
+    const regionChooserPanel = document.getElementById('regionChooserPanel');
+    const regionChooserList = document.getElementById('regionChooserList');
+    const regionChooserSearch = document.getElementById('regionChooserSearch');
+    const regionChooserText = document.getElementById('regionChooserText');
+    function syncRegionChooserLabel() {
+      if (!regionSelEl || !regionChooserText) return;
+      const opt = regionSelEl.options[regionSelEl.selectedIndex];
+      regionChooserText.textContent = opt ? opt.textContent : 'Semua wilayah';
+    }
+    function buildRegionChooserList() {
+      if (!regionSelEl || !regionChooserList) return;
+      const q = (regionChooserSearch.value || '').toLowerCase().trim();
+      const opts = [...regionSelEl.options].filter(o => !q || o.textContent.toLowerCase().includes(q));
+      regionChooserList.innerHTML = opts.length ? opts.map(o => '<button type="button" class="chooser-item' + (o.value === regionSelEl.value ? ' active' : '') + '" role="option" data-value="' + String(o.value).replace(/"/g, '&quot;') + '">' + String(o.textContent).replace(/</g, '&lt;') + '</button>').join('') : '<div class="chooser-empty">Tidak ada wilayah yang cocok.</div>';
+    }
+    function openRegionChooser() {
+      regionChooserSearch.value = '';
+      buildRegionChooserList();
+      regionChooserPanel.hidden = false;
+      regionChooserBtn.setAttribute('aria-expanded', 'true');
+      regionChooserSearch.focus();
+    }
+    function closeRegionChooser() {
+      regionChooserPanel.hidden = true;
+      regionChooserBtn.setAttribute('aria-expanded', 'false');
+    }
+    if (regionChooserBtn && regionChooserPanel) {
+      regionChooserBtn.addEventListener('click', e => { e.stopPropagation(); regionChooserPanel.hidden ? openRegionChooser() : closeRegionChooser(); });
+      regionChooserSearch.addEventListener('input', buildRegionChooserList);
+      regionChooserSearch.addEventListener('click', e => e.stopPropagation());
+      regionChooserList.addEventListener('click', e => {
+        const item = e.target.closest('.chooser-item');
+        if (!item) return;
+        regionSelEl.value = item.dataset.value;
+        regionSelEl.dispatchEvent(new Event('change', { bubbles: true }));
+        syncRegionChooserLabel();
+        closeRegionChooser();
+      });
+      document.addEventListener('click', e => { if (!regionChooserPanel.hidden && !regionChooserEl.contains(e.target)) closeRegionChooser(); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape' && !regionChooserPanel.hidden) closeRegionChooser(); });
+      regionSelEl.addEventListener('change', syncRegionChooserLabel);
+      new MutationObserver(syncRegionChooserLabel).observe(regionSelEl, { childList: true });
+      syncRegionChooserLabel();
+    }
+
     restoreCustomerData();
     refreshDashboardData();
+    // Pulihkan sesi tambah/edit yang terputus: form masih terbuka saat halaman termuat ulang / reconnect
+    const _interruptedDraft = loadCrudDraft();
+    if (_interruptedDraft && _interruptedDraft.open && adminLoggedIn) {
+      if (_interruptedDraft.mode === 'edit') { const _r = customerRows.find(x => x[6] === _interruptedDraft.editingId); if (_r) openCustomerCrud('edit', _r); }
+      else openCustomerCrud('create');
+    }
     if (gasApiUrl) {
       fetchFromGoogleSheet();
     } else {
