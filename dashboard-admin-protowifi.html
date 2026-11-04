@@ -1826,6 +1826,32 @@ th, label, .kpi-label, .fg-badge, .date-chip, .wizard-step, .mini-stat span, .pa
     .chooser-item:hover { background: oklch(95% 0.028 256); }
     .chooser-item.active { background: oklch(90% 0.055 256); font-weight: 700; }
     .chooser-empty { padding: 10px; font-size: 13px; color: oklch(50% 0.018 258); }
+    /* === Responsif Android: audit menyeluruh nav/topbar/kartu/tabel/modal/form === */
+    .wizard-progress { -webkit-overflow-scrolling: touch; }
+    .pagination { row-gap: 5px; }
+    @media (max-width: 640px) {
+      .toast { left: 12px; right: 12px; bottom: 12px; text-align: center; }
+      .pagination { flex-wrap: wrap; }
+      .table-tools { flex-wrap: wrap; }
+      .table-tools .search { flex: 1 1 100%; width: 100%; }
+      .table-tools .btn { flex: 1 1 auto; }
+      .panel-head { flex-wrap: wrap; }
+      .mini-stat strong { font-size: 19px; }
+      .payment-metric strong { font-size: 17px; }
+      .kpi-value { overflow-wrap: anywhere; }
+      .chooser-panel { min-width: 0; }
+      .filter-group-head { flex-wrap: wrap; row-gap: 4px; }
+    }
+    @media (max-width: 460px) {
+      .crud-footer>div { flex-wrap: wrap; width: 100%; }
+      .crud-footer>div .btn { flex: 1 1 40%; }
+      .delete-actions { flex-wrap: wrap; }
+      .delete-actions .btn { flex: 1 1 40%; }
+      .customer-actions .btn { flex: 1 1 45%; }
+    }
+    @media (max-width: 400px) {
+      .login-trigger { font-size: 12px; padding: 0 8px; }
+    }
 </style>
   <!-- Leaflet.js Interactive GIS Map -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -2759,6 +2785,13 @@ th, label, .kpi-label, .fg-badge, .date-chip, .wizard-step, .mini-stat span, .pa
     if (exportBtn) exportBtn.onclick = () => { if (typeof exportDashboardToCsv === 'function') exportDashboardToCsv(); };
     document.querySelectorAll('[data-nav]').forEach(a => a.onclick = e => { e.preventDefault(); showToast('Halaman ' + a.textContent.trim() + ' siap dihubungkan'); });
     document.getElementById('menuBtn').onclick = () => document.getElementById('sidebar').classList.toggle('open');
+    // Di HP, klik di luar sidebar menutup menu (tanpa backdrop)
+    document.addEventListener('click', e => {
+      const sb = document.getElementById('sidebar');
+      if (!sb || !sb.classList.contains('open') || window.innerWidth > 800) return;
+      if (e.target.closest('#sidebar') || e.target.closest('#menuBtn')) return;
+      sb.classList.remove('open');
+    });
     function openLogin() {
       const err = document.getElementById('loginError');
       if (err) err.classList.remove('show');
