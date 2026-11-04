@@ -2273,16 +2273,16 @@ th, label, .kpi-label, .fg-badge, .date-chip, .wizard-step, .mini-stat span, .pa
         <div><strong>JACNET</strong></div>
       </div>
       <h2 id="loginTitle">Login Administrator</h2>
-      <form id="loginForm">
+      <form id="loginForm" autocomplete="off">
         <div class="login-field"><label for="adminEmail">Email / Nama Pengguna Admin</label><input id="adminEmail"
-            type="text" placeholder="admin@jacnet.id" autocomplete="username" required>
+            type="text" placeholder="Masukkan email / username admin" autocomplete="username" required>
         </div>
         <div class="login-field"><label for="adminPassword">Kata Sandi</label>
           <div class="password-wrap"><input id="adminPassword" type="password"
               placeholder="Masukkan kata sandi" autocomplete="current-password" required><button type="button"
               class="toggle-password" id="togglePassword" aria-label="Tampilkan kata sandi"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
         </div>
-        <div class="login-options"><label class="remember"><input type="checkbox" id="rememberAdmin" checked> Ingat
+        <div class="login-options"><label class="remember"><input type="checkbox" id="rememberAdmin"> Ingat
             saya</label></div>
         <div class="login-error" id="loginError" role="alert">Masukkan email dan kata sandi yang valid.</div>
         <button class="login-submit" type="submit">Masuk ke Dashboard</button>
@@ -2809,12 +2809,17 @@ th, label, .kpi-label, .fg-badge, .date-chip, .wizard-step, .mini-stat span, .pa
       if (err) err.classList.remove('show');
       const emailEl = document.getElementById('adminEmail');
       const passEl = document.getElementById('adminPassword');
-      if (emailEl && (!emailEl.value || emailEl.value.includes('protowifi'))) emailEl.value = 'admin@jacnet.id';
-      if (passEl && !passEl.value) passEl.value = 'admin123';
+      // Bersihkan password dan input agar aman & tidak terisi otomatis untuk visitor
+      if (passEl) passEl.value = '';
+      if (emailEl) emailEl.value = '';
       loginOverlay.classList.add('open');
-      setTimeout(() => (passEl || emailEl)?.focus(), 80);
+      setTimeout(() => (emailEl || passEl)?.focus(), 80);
     }
-    function closeLogin() { loginOverlay.classList.remove('open') }
+    function closeLogin() {
+      const passEl = document.getElementById('adminPassword');
+      if (passEl) passEl.value = '';
+      loginOverlay.classList.remove('open');
+    }
     document.getElementById('openLogin').onclick = openLogin;
     document.getElementById('closeLogin').onclick = closeLogin;
     loginOverlay.addEventListener('click', e => { if (e.target === loginOverlay) closeLogin() });
@@ -2837,6 +2842,7 @@ th, label, .kpi-label, .fg-badge, .date-chip, .wizard-step, .mini-stat span, .pa
         return;
       }
       error.classList.remove('show');
+      document.getElementById('adminPassword').value = '';
       adminLoggedIn = true;
       localStorage.setItem('jacnet_admin_logged_in', 'true');
       localStorage.setItem('protowifi_admin_logged_in', 'true');
