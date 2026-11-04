@@ -5,8 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>JACNET Admin | PT Citra Nusantara Cyberindo (Site Sumedang)</title>
-  <meta name="description"
-    content="Dashboard admin JACNET/ProtoWifi PT Citra Nusantara Cyberindo site Sumedang: kelola data pelanggan, tagihan, dan pembayaran." />
+  <meta name="description" content="Dashboard admin JACNET/ProtoWifi PT Citra Nusantara Cyberindo site Sumedang: kelola data pelanggan, tagihan, dan pembayaran." />
   <style>
     :root {
       --bg: oklch(95% 0.028 256);
@@ -1442,9 +1441,7 @@
       .crud-header,
       .crud-fields {
         padding: 16px
-      }
-
-      .crud-grid {
+      }.crud-grid{
         grid-template-columns: repeat(2, minmax(0, 1fr));
         padding: 12px
       }
@@ -1460,8 +1457,7 @@
       }
     }
 
-    @media(max-width:460px) {
-      .crud-grid {
+    @media(max-width:460px) {.crud-grid{
         grid-template-columns: 1fr
       }
     }
@@ -1561,9 +1557,7 @@
 
       .wizard-step {
         min-width: 90px
-      }
-
-      .payment-entry-grid {
+      }.payment-entry-grid{
         grid-template-columns: 1fr
       }
     }
@@ -1604,7 +1598,6 @@
       font-size: 12px;
       white-space: nowrap;
     }
-
     .dashboard-master-table th {
       padding: 9px 12px;
       font-size: 12px;
@@ -1616,762 +1609,212 @@
       top: 0;
       z-index: 2;
     }
-
     .dashboard-master-table td {
       padding: 7px 11px;
       border-bottom: 1px solid oklch(95% 0.028 256);
       color: oklch(21% 0.028 262);
       font-size: 12px;
     }
+    .dashboard-master-table tr:hover { background: oklch(95% 0.028 256); }
+    
+    .th-id { background: oklch(95% 0.028 256) !important; color: oklch(52% 0.19 258) !important; }
+    .th-status { background: oklch(62% 0.14 72) !important; color: oklch(43% 0.2 262) !important; }
+    .th-freeze { background: oklch(96% 0.02 27) !important; color: oklch(52% 0.19 27) !important; }
+    .th-tech { background: oklch(95% 0.028 256) !important; color: oklch(21% 0.028 262) !important; }
+    .th-pay { background: oklch(95% 0.03 155) !important; color: oklch(40% 0.11 150) !important; }
 
-    .dashboard-master-table tr:hover {
-      background: oklch(95% 0.028 256);
-    }
-
-    .th-id {
-      background: oklch(95% 0.028 256) !important;
-      color: oklch(52% 0.19 258) !important;
-    }
-
-    .th-status {
-      background: oklch(62% 0.14 72) !important;
-      color: oklch(43% 0.2 262) !important;
-    }
-
-    .th-freeze {
-      background: oklch(96% 0.02 27) !important;
-      color: oklch(52% 0.19 27) !important;
-    }
-
-    .th-tech {
-      background: oklch(95% 0.028 256) !important;
-      color: oklch(21% 0.028 262) !important;
-    }
-
-    .th-pay {
-      background: oklch(95% 0.03 155) !important;
-      color: oklch(40% 0.11 150) !important;
-    }
-
-    .print-header {
-      display: none;
-    }
-
+    .print-header { display: none; }
     @media print {
-      body {
-        background: oklch(99.4% 0.003 250) !important;
-        color: oklch(21% 0.028 262) !important;
-        font-size: 8pt !important;
-      }
-
-      .sidebar,
-      .topbar,
-      .filters,
-      .analytics,
-      .kpis,
-      .customer-actions,
-      .crud-overlay,
-      .pagination,
-      .table-tools button,
-      .table-tools .search,
-      .table-tools label,
-      #customerManagement,
-      #toast {
+      body { background: oklch(99.4% 0.003 250) !important; color: oklch(21% 0.028 262) !important; font-size: 8pt !important; }.sidebar, .topbar, .filters, .analytics, .kpis, .customer-actions, .crud-overlay, .pagination, .table-tools button, .table-tools .search, .table-tools label, #customerManagement, #toast{
         display: none !important;
       }
-
-      .app,
-      .main,
-      .content {
-        margin: 0 !important;
-        padding: 0 !important;
-        width: 100% !important;
-        max-width: 100% !important;
+      .app, .main, .content {
+        margin: 0 !important; padding: 0 !important; width: 100% !important; max-width: 100% !important;
       }
-
-      .panel {
-        box-shadow: none !important;
-        border: none !important;
-        padding: 0 !important;
-      }
-
+      .panel { box-shadow: none !important; border: none !important; padding: 0 !important; }
       .print-header {
         display: block !important;
         border-bottom: 2px solid oklch(43% 0.2 262);
         padding-bottom: 10px;
         margin-bottom: 14px;
       }
-
-      .table-scroll {
-        max-height: none !important;
-        overflow: visible !important;
-      }
-
-      table {
-        font-size: 7.5pt !important;
-        width: 100% !important;
-        border-collapse: collapse !important;
-      }
-
-      th,
-      td {
-        padding: 3px 5px !important;
-        border: 1px solid oklch(83% 0.012 252) !important;
-      }
+      .table-scroll { max-height: none !important; overflow: visible !important; }
+      table { font-size: 7.5pt !important; width: 100% !important; border-collapse: collapse !important; }
+      th, td { padding: 3px 5px !important; border: 1px solid oklch(83% 0.012 252) !important; }
     }
 
     /* === Pin kolom ID & Nama saat scroll menyamping === */
-    .dashboard-master-table th:nth-child(7),
-    .dashboard-master-table td:nth-child(7),
-    .wide-customer-table th:nth-child(7),
-    .wide-customer-table td:nth-child(7) {
-      position: sticky;
-      left: 0;
-      z-index: 4;
-      width: 118px;
-      min-width: 118px;
-      max-width: 118px;
-      background: oklch(99.4% 0.003 250);
+    .dashboard-master-table th:nth-child(7), .dashboard-master-table td:nth-child(7),
+    .wide-customer-table th:nth-child(7), .wide-customer-table td:nth-child(7) {
+      position: sticky; left: 0; z-index: 4; width: 118px; min-width: 118px; max-width: 118px; background: oklch(99.4% 0.003 250);
     }
-
-    .dashboard-master-table th:nth-child(9),
-    .dashboard-master-table td:nth-child(9),
-    .wide-customer-table th:nth-child(9),
-    .wide-customer-table td:nth-child(9) {
-      position: sticky;
-      left: 118px;
-      z-index: 4;
-      min-width: 150px;
-      background: oklch(99.4% 0.003 250);
+    .dashboard-master-table th:nth-child(9), .dashboard-master-table td:nth-child(9),
+    .wide-customer-table th:nth-child(9), .wide-customer-table td:nth-child(9) {
+      position: sticky; left: 118px; z-index: 4; min-width: 150px; background: oklch(99.4% 0.003 250);
       box-shadow: 8px 0 10px -6px oklch(52% 0.19 258 / .28);
     }
-
-    .dashboard-master-table thead th:nth-child(7),
-    .dashboard-master-table thead th:nth-child(9),
-    .wide-customer-table thead th:nth-child(7),
-    .wide-customer-table thead th:nth-child(9) {
-      z-index: 6;
-    }
-
-    .wide-customer-table thead th:nth-child(7),
-    .wide-customer-table thead th:nth-child(9) {
-      background: oklch(95% 0.028 256);
-    }
+    .dashboard-master-table thead th:nth-child(7), .dashboard-master-table thead th:nth-child(9),
+    .wide-customer-table thead th:nth-child(7), .wide-customer-table thead th:nth-child(9) { z-index: 6; }
+    .wide-customer-table thead th:nth-child(7), .wide-customer-table thead th:nth-child(9) { background: oklch(95% 0.028 256); }
 
     /* === Panel filter manajemen: melayang (sticky) + grup buka-tutup === */
     .customer-filter-panel {
-      position: sticky;
-      top: 88px;
-      z-index: 3;
-      max-height: calc(100vh - 104px);
-      overflow-y: auto;
+      position: sticky; top: 88px; z-index: 3;
+      max-height: calc(100vh - 104px); overflow-y: auto;
       box-shadow: 0 14px 34px oklch(52% 0.19 258 / .13);
     }
-
-    .filter-group {
-      grid-column: 1 / -1;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      overflow: hidden;
-      background: oklch(95% 0.028 256);
-    }
-
-    .filter-group-head {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      width: 100%;
-      padding: 10px 14px;
-      background: oklch(95% 0.028 256);
-      border: none;
-      cursor: pointer;
-      font: inherit;
-      text-align: left;
-    }
-
-    .filter-group-head .fg-title {
-      font-weight: 800;
-      color: oklch(43% 0.2 262);
-      font-size: 13px;
-    }
-
-    .filter-group-head .fg-badge {
-      background: oklch(52% 0.19 258);
-      color: oklch(99.4% 0.003 250);
-      font-size: 12px;
-      font-weight: 700;
-      border-radius: 999px;
-      padding: 2px 9px;
-    }
-
-    .filter-group-head .fg-chev {
-      margin-left: auto;
-      transition: transform .2s;
-      color: oklch(36% 0.022 260);
-    }
-
-    .filter-group.collapsed .fg-chev {
-      transform: rotate(-90deg);
-    }
-
-    .filter-group.collapsed .filter-group-body {
-      display: none;
-    }
-
-    .filter-group-body {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(150px, 1fr));
-      gap: 12px;
-      padding: 12px 14px;
-    }
-
-    @media (max-width: 1100px) {
-      .filter-group-body {
-        grid-template-columns: repeat(2, minmax(140px, 1fr));
-      }
-    }
-
-    @media (max-width: 640px) {
-      .filter-group-body {
-        grid-template-columns: 1fr;
-      }
-
-      .customer-filter-panel {
-        top: 84px;
-      }
-    }
+    .filter-group { grid-column: 1 / -1; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: oklch(95% 0.028 256); }
+    .filter-group-head { display: flex; align-items: center; gap: 10px; width: 100%; padding: 10px 14px; background: oklch(95% 0.028 256); border: none; cursor: pointer; font: inherit; text-align: left; }
+    .filter-group-head .fg-title { font-weight: 800; color: oklch(43% 0.2 262); font-size: 13px; }
+    .filter-group-head .fg-badge { background: oklch(52% 0.19 258); color: oklch(99.4% 0.003 250); font-size: 12px; font-weight: 700; border-radius: 999px; padding: 2px 9px; }
+    .filter-group-head .fg-chev { margin-left: auto; transition: transform .2s; color: oklch(36% 0.022 260); }
+    .filter-group.collapsed .fg-chev { transform: rotate(-90deg); }
+    .filter-group.collapsed .filter-group-body { display: none; }
+    .filter-group-body { display: grid; grid-template-columns: repeat(4, minmax(150px, 1fr)); gap: 12px; padding: 12px 14px; }
+    @media (max-width: 1100px) { .filter-group-body { grid-template-columns: repeat(2, minmax(140px, 1fr)); } }
+    @media (max-width: 640px) { .filter-group-body { grid-template-columns: 1fr; } .customer-filter-panel { top: 84px; } }
 
     /* === Pin kolom AKSI (kanan) di tabel manajemen === */
     .wide-customer-table .action-cell {
-      position: sticky;
-      right: 0;
-      z-index: 4;
-      background: oklch(99.4% 0.003 250);
+      position: sticky; right: 0; z-index: 4; background: oklch(99.4% 0.003 250);
       box-shadow: -8px 0 10px -6px oklch(52% 0.19 258 / .25);
     }
-
-    .wide-customer-table .action-head {
-      z-index: 6;
-      box-shadow: -8px 0 10px -6px oklch(52% 0.19 258 / .25);
-    }
+    .wide-customer-table .action-head { z-index: 6; box-shadow: -8px 0 10px -6px oklch(52% 0.19 258 / .25); }
 
     /* === Layout manajemen: konten utama + nav filter di kanan === */
-    .mgmt-layout {
-      display: flex;
-      gap: 18px;
-      align-items: stretch;
-    }
-
-    .mgmt-main {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .mgmt-side {
-      width: 330px;
-      flex: none;
-    }
-
-    .mgmt-side .customer-filter-panel {
-      margin-bottom: 0;
-    }
-
-    .mgmt-side .customer-filters {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .mgmt-side .filter-group-body {
-      grid-template-columns: 1fr;
-    }
-
-    .mgmt-side .customer-filters .wide-search {
-      grid-column: auto;
-    }
-
+    .mgmt-layout { display: flex; gap: 18px; align-items: stretch; }
+    .mgmt-main { flex: 1; min-width: 0; }
+    .mgmt-side { width: 330px; flex: none; }
+    .mgmt-side .customer-filter-panel { margin-bottom: 0; }
+    .mgmt-side .customer-filters { display: flex; flex-direction: column; gap: 12px; }
+    .mgmt-side .filter-group-body { grid-template-columns: 1fr; }
+    .mgmt-side .customer-filters .wide-search { grid-column: auto; }
     @media (max-width: 1150px) {
-      .mgmt-layout {
-        flex-direction: column;
-      }
-
-      .mgmt-side {
-        width: 100%;
-      }
-
-      .mgmt-side .customer-filter-panel {
-        position: static;
-        max-height: none;
-        overflow: visible;
-      }
-
-      .mgmt-side .filter-group-body {
-        grid-template-columns: repeat(2, minmax(140px, 1fr));
-      }
+      .mgmt-layout { flex-direction: column; }
+      .mgmt-side { width: 100%; }
+      .mgmt-side .customer-filter-panel { position: static; max-height: none; overflow: visible; }
+      .mgmt-side .filter-group-body { grid-template-columns: repeat(2, minmax(140px, 1fr)); }
     }
 
     /* === Laporan cetak (Export PDF) === */
-    #printReport {
-      display: none;
-    }
-
-    @page {
-      size: A4 portrait;
-      margin: 9mm;
-    }
-
+    #printReport { display: none; }
+    @page { size: A4 landscape; margin: 9mm; }
     @media print {
-      .app {
-        display: none !important;
-      }
-
-      #printReport {
-        display: block !important;
-        color: oklch(21% 0.028 262);
-        font-family: 'Google Sans', 'Product Sans', system-ui, sans-serif;
-      }
-
-      #printReport .pr-kop {
-        text-align: center;
-        border-bottom: 3px double oklch(43% 0.2 262);
-        padding-bottom: 8px;
-        margin-bottom: 12px;
-      }
-
-      #printReport .pr-kop-title {
-        font-size: 22pt;
-        font-weight: 900;
-        letter-spacing: 2px;
-      }
-
-      #printReport .pr-kop-sub {
-        font-size: 10pt;
-        font-weight: 700;
-        letter-spacing: 1px;
-      }
-
-      #printReport .pr-kop-addr {
-        font-size: 9pt;
-        color: oklch(21% 0.028 262);
-      }
-
-      #printReport .pr-title {
-        font-size: 13pt;
-        margin: 4px 0 2px;
-      }
-
-      #printReport .pr-meta {
-        font-size: 9pt;
-        color: oklch(21% 0.028 262);
-        margin-bottom: 10px;
-      }
-
-      #printReport .pr-kpis {
-        display: flex;
-        gap: 8px;
-        margin-bottom: 12px;
-      }
-
-      #printReport .pr-kpi {
-        flex: 1;
-        border: 1.5px solid oklch(43% 0.2 262);
-        border-radius: 6px;
-        padding: 7px 9px;
-      }
-
-      #printReport .pr-kpi span {
-        font-size: 8pt;
-        text-transform: uppercase;
-        color: oklch(36% 0.022 260);
-        display: block;
-      }
-
-      #printReport .pr-kpi strong {
-        font-size: 13pt;
-      }
-
-      #printReport .pr-kpi small {
-        display: block;
-        font-size: 8pt;
-        color: oklch(36% 0.022 260);
-      }
-
-      #printReport .pr-chart {
-        width: 100%;
-        max-height: 62mm;
-        object-fit: contain;
-        border: 1px solid oklch(83% 0.012 252);
-        border-radius: 6px;
-        margin-bottom: 12px;
-      }
-
-      #printReport table {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: 6.5pt;
-      }
-
-      #printReport th,
-      #printReport td {
-        border: 1px solid oklch(69% 0.022 256);
-        padding: 2px 3px;
-        text-align: left;
-        vertical-align: top;
-      }
-
-      #printReport thead {
-        display: table-header-group;
-      }
-
-      #printReport .pr-foot {
-        margin-top: 10px;
-        font-size: 8pt;
-        color: oklch(36% 0.022 260);
-        border-top: 1px solid oklch(69% 0.022 256);
-        padding-top: 6px;
-      }
-
-      #printReport .ir-title {
-        text-align: center;
-        font-size: 15pt;
-        font-weight: 900;
-        text-decoration: underline;
-        margin-bottom: 6px;
-      }
-
-      #printReport .ir-sub {
-        display: flex;
-        justify-content: space-between;
-        gap: 12px;
-        font-size: 10pt;
-        margin-bottom: 6px;
-      }
-
-      #printReport table.ir-table {
-        font-size: 10pt;
-      }
-
-      #printReport table.ir-table th {
-        background: oklch(93% 0.13 95);
-        text-align: center;
-        font-weight: 800;
-        border: 1px solid oklch(45% 0.02 260);
-        padding: 3px 5px;
-      }
-
-      #printReport table.ir-table td {
-        border: 1px solid oklch(45% 0.02 260);
-        padding: 3px 5px;
-      }
-
-      #printReport table.ir-table td.num,
-      #printReport table.ir-table tfoot td {
-        text-align: right;
-      }
-
-      #printReport table.ir-table td.ctr {
-        text-align: center;
-      }
-
-      #printReport table.ir-table tfoot td {
-        font-weight: 800;
-        background: oklch(96% 0.02 95);
-      }
+      .app { display: none !important; }
+      #printReport { display: block !important; color: oklch(21% 0.028 262); font-family: 'Google Sans', 'Product Sans', system-ui, sans-serif; }
+      #printReport .pr-kop { text-align: center; border-bottom: 3px double oklch(43% 0.2 262); padding-bottom: 8px; margin-bottom: 12px; }
+      #printReport .pr-kop-title { font-size: 22pt; font-weight: 900; letter-spacing: 2px; }
+      #printReport .pr-kop-sub { font-size: 10pt; font-weight: 700; letter-spacing: 1px; }
+      #printReport .pr-kop-addr { font-size: 9pt; color: oklch(21% 0.028 262); }
+      #printReport .pr-title { font-size: 13pt; margin: 4px 0 2px; }
+      #printReport .pr-meta { font-size: 9pt; color: oklch(21% 0.028 262); margin-bottom: 10px; }
+      #printReport .pr-kpis { display: flex; gap: 8px; margin-bottom: 12px; }
+      #printReport .pr-kpi { flex: 1; border: 1.5px solid oklch(43% 0.2 262); border-radius: 6px; padding: 7px 9px; }
+      #printReport .pr-kpi span { font-size: 8pt; text-transform: uppercase; color: oklch(36% 0.022 260); display: block; }
+      #printReport .pr-kpi strong { font-size: 13pt; }
+      #printReport .pr-kpi small { display: block; font-size: 8pt; color: oklch(36% 0.022 260); }
+      #printReport .pr-chart { width: 100%; max-height: 62mm; object-fit: contain; border: 1px solid oklch(83% 0.012 252); border-radius: 6px; margin-bottom: 12px; }
+      #printReport table { width: 100%; border-collapse: collapse; font-size: 6.5pt; }
+      #printReport th, #printReport td { border: 1px solid oklch(69% 0.022 256); padding: 2px 3px; text-align: left; vertical-align: top; }
+      #printReport thead { display: table-header-group; }
+      #printReport .pr-foot { margin-top: 10px; font-size: 8pt; color: oklch(36% 0.022 260); border-top: 1px solid oklch(69% 0.022 256); padding-top: 6px; }
+      #printReport .ir-title { text-align: center; font-size: 15pt; font-weight: 900; text-decoration: underline; margin-bottom: 6px; }
+      #printReport .ir-sub { display: flex; justify-content: space-between; gap: 12px; font-size: 10pt; margin-bottom: 6px; }
+      #printReport table.ir-table { font-size: 10pt; }
+      #printReport table.ir-table th { background: oklch(93% 0.13 95); text-align: center; font-weight: 800; border: 1px solid oklch(45% 0.02 260); padding: 3px 5px; }
+      #printReport table.ir-table td { border: 1px solid oklch(45% 0.02 260); padding: 3px 5px; }
+      #printReport table.ir-table td.num, #printReport table.ir-table tfoot td { text-align: right; }
+      #printReport table.ir-table td.ctr { text-align: center; }
+      #printReport table.ir-table tfoot td { font-weight: 800; background: oklch(96% 0.02 95); }
     }
+    th.th-empty-active { background: oklch(43% 0.2 262) !important; color: oklch(99% 0.01 250) !important; }
+    th[data-dcol], th[data-mcol] { cursor: pointer; }
+  
+/* ================= HALLMARK COBALT — tema penuh ================= */
+:root {
+  --cob-paper: oklch(98.6% 0.005 250); --cob-paper-2: oklch(96.2% 0.008 252); --cob-paper-3: oklch(93% 0.011 252);
+  --cob-face: oklch(99.4% 0.003 250); --cob-ink: oklch(21% 0.028 262); --cob-ink-2: oklch(36% 0.022 260);
+  --cob-muted: oklch(50% 0.018 258); --cob-rule: oklch(90% 0.009 252); --cob-rule-2: oklch(83% 0.012 252);
+  --cob-graphite: oklch(21% 0.024 262); --cob-graphite-2: oklch(26.5% 0.026 262); --cob-graphite-ink: oklch(93% 0.010 250);
+  --cob-accent: oklch(52% 0.19 258); --cob-accent-2: oklch(76% 0.13 254); --cob-accent-wash: oklch(95% 0.028 256);
+  --cob-accent-hover: oklch(48% 0.19 259); --cob-accent-edge: oklch(39% 0.16 260); --cob-accent-deep: oklch(43% 0.2 262);
+  --cob-error: oklch(52% 0.19 27); --cob-success: oklch(50% 0.12 150);
+  --cob-font-display: 'Google Sans', 'Product Sans', system-ui, sans-serif; --cob-font-body: 'Google Sans', 'Product Sans', system-ui, sans-serif;
+  --cob-font-mono: 'Google Sans', 'Product Sans', system-ui, sans-serif;
+  --cob-radius-card: 8px; --cob-radius-input: 6px;
+  --cob-shadow-card: 0 1px 2px oklch(21% 0.028 262 / 0.06);
+  --cob-shadow-panel: 0 1px 0 var(--cob-rule), 0 18px 32px -24px oklch(21% 0.028 262 / 0.28);
+  --cob-key-edge: oklch(80% 0.016 254);
+  --cob-shadow-key: 0 3px 0 0 var(--cob-key-edge), 0 6px 8px -4px oklch(21% 0.028 262 / 0.28), inset 0 1px 0 oklch(100% 0 0 / 0.9);
+  --cob-shadow-key-hover: 0 4px 0 0 var(--cob-key-edge), 0 8px 10px -5px oklch(21% 0.028 262 / 0.28), inset 0 1px 0 oklch(100% 0 0 / 0.9);
+  --cob-shadow-key-press: 0 0 0 0 var(--cob-key-edge), 0 1px 2px -1px oklch(21% 0.028 262 / 0.28), inset 0 1px 2px oklch(21% 0.028 262 / 0.14);
+  --cob-shadow-key-accent: 0 3px 0 0 var(--cob-accent-edge), 0 6px 8px -4px oklch(30% 0.12 260 / 0.45), inset 0 1px 0 oklch(100% 0 0 / 0.22);
+  --cob-shadow-key-accent-hover: 0 4px 0 0 var(--cob-accent-edge), 0 8px 10px -5px oklch(30% 0.12 260 / 0.45), inset 0 1px 0 oklch(100% 0 0 / 0.22);
+  --cob-shadow-key-accent-press: 0 0 0 0 var(--cob-accent-edge), 0 1px 2px -1px oklch(30% 0.12 260 / 0.45), inset 0 1px 3px oklch(21% 0.1 262 / 0.32);
+}
+body { font-family: var(--cob-font-body) !important; background: var(--cob-paper) !important; color: var(--cob-ink) !important; }
+h1, h2, h3, h4, .crud-header h2, .login-modal h2, .delete-modal h2, .wizard-page-title, .kpi-value, #printReport h1, #printReport h2 {
+  font-family: var(--cob-font-display) !important; font-weight: 600 !important; letter-spacing: -0.028em !important;
+}code, kbd, .kpi-value{ font-family: var(--cob-font-mono); }
+::selection { background: var(--cob-accent-2); color: var(--cob-ink); }
+.btn { font-family: var(--cob-font-display); font-weight: 600; letter-spacing: -0.01em; border-radius: var(--cob-radius-input);
+  background: var(--cob-face); color: var(--cob-ink); border: 1px solid var(--cob-rule-2); box-shadow: var(--cob-shadow-key);
+  transition: transform 120ms cubic-bezier(0.16,1,0.3,1), box-shadow 120ms cubic-bezier(0.16,1,0.3,1), background-color 220ms cubic-bezier(0.16,1,0.3,1); }
+.btn:hover { box-shadow: var(--cob-shadow-key-hover); transform: translateY(-1px); }
+.btn:active { box-shadow: var(--cob-shadow-key-press); transform: translateY(2px); }
+.btn-primary { background: var(--cob-accent) !important; color: var(--cob-face) !important; border-color: var(--cob-accent-edge) !important; box-shadow: var(--cob-shadow-key-accent) !important; }
+.btn-primary:hover { background: var(--cob-accent-hover) !important; box-shadow: var(--cob-shadow-key-accent-hover) !important; }
+.btn-primary:active { box-shadow: var(--cob-shadow-key-accent-press) !important; }
+.btn-danger { background: var(--cob-error) !important; color: var(--cob-face) !important; border-color: oklch(39% 0.15 27) !important;
+  box-shadow: 0 3px 0 0 oklch(39% 0.15 27), 0 6px 8px -4px oklch(30% 0.12 27 / 0.45), inset 0 1px 0 oklch(100% 0 0 / 0.22) !important; }.kpi, .customer-table-panel, .customer-filter-panel, .mini-stat, #printReport .pr-kpi{
+  border-radius: var(--cob-radius-card) !important; border: 1px solid var(--cob-rule) !important;
+  background: var(--cob-face) !important; box-shadow: var(--cob-shadow-card) !important; }
+.crud-modal, .login-modal, .delete-modal { border-radius: var(--cob-radius-card) !important; box-shadow: var(--cob-shadow-panel) !important; }
+input, select, textarea { border-radius: var(--cob-radius-input) !important; }
+.crud-field input:focus, .crud-field select:focus, .crud-field textarea:focus,
+.field input:focus, .field select:focus, .search input:focus, .login-field input:focus {
+  border-color: var(--cob-accent) !important; outline: 3px solid var(--cob-accent-wash) !important; outline-offset: 0; }
+table th { font-family: var(--cob-font-display); letter-spacing: -0.01em; }
+.wizard-step.active { background: var(--cob-accent) !important; color: var(--cob-face) !important; }
+.wizard-step.done { background: var(--cob-accent-wash) !important; color: var(--cob-accent-deep) !important; }
+@supports (corner-shape: bevel) {
+  .btn, .icon-btn, .menu-btn { border-radius: 8px 3px 8px 3px; corner-shape: bevel round bevel round; }.kpi, .customer-table-panel, .customer-filter-panel, .crud-modal, .login-modal, .delete-modal, .mini-stat{
+    border-radius: 16px 4px 16px 4px; corner-shape: bevel round bevel round; }
+}
 
-    th.th-empty-active {
-      background: oklch(43% 0.2 262) !important;
-      color: oklch(99% 0.01 250) !important;
-    }
-
-    th[data-dcol],
-    th[data-mcol] {
-      cursor: pointer;
-    }
-
-    /* ================= HALLMARK COBALT — tema penuh ================= */
-    :root {
-      --cob-paper: oklch(98.6% 0.005 250);
-      --cob-paper-2: oklch(96.2% 0.008 252);
-      --cob-paper-3: oklch(93% 0.011 252);
-      --cob-face: oklch(99.4% 0.003 250);
-      --cob-ink: oklch(21% 0.028 262);
-      --cob-ink-2: oklch(36% 0.022 260);
-      --cob-muted: oklch(50% 0.018 258);
-      --cob-rule: oklch(90% 0.009 252);
-      --cob-rule-2: oklch(83% 0.012 252);
-      --cob-graphite: oklch(21% 0.024 262);
-      --cob-graphite-2: oklch(26.5% 0.026 262);
-      --cob-graphite-ink: oklch(93% 0.010 250);
-      --cob-accent: oklch(52% 0.19 258);
-      --cob-accent-2: oklch(76% 0.13 254);
-      --cob-accent-wash: oklch(95% 0.028 256);
-      --cob-accent-hover: oklch(48% 0.19 259);
-      --cob-accent-edge: oklch(39% 0.16 260);
-      --cob-accent-deep: oklch(43% 0.2 262);
-      --cob-error: oklch(52% 0.19 27);
-      --cob-success: oklch(50% 0.12 150);
-      --cob-font-display: 'Google Sans', 'Product Sans', system-ui, sans-serif;
-      --cob-font-body: 'Google Sans', 'Product Sans', system-ui, sans-serif;
-      --cob-font-mono: 'Google Sans', 'Product Sans', system-ui, sans-serif;
-      --cob-radius-card: 8px;
-      --cob-radius-input: 6px;
-      --cob-shadow-card: 0 1px 2px oklch(21% 0.028 262 / 0.06);
-      --cob-shadow-panel: 0 1px 0 var(--cob-rule), 0 18px 32px -24px oklch(21% 0.028 262 / 0.28);
-      --cob-key-edge: oklch(80% 0.016 254);
-      --cob-shadow-key: 0 3px 0 0 var(--cob-key-edge), 0 6px 8px -4px oklch(21% 0.028 262 / 0.28), inset 0 1px 0 oklch(100% 0 0 / 0.9);
-      --cob-shadow-key-hover: 0 4px 0 0 var(--cob-key-edge), 0 8px 10px -5px oklch(21% 0.028 262 / 0.28), inset 0 1px 0 oklch(100% 0 0 / 0.9);
-      --cob-shadow-key-press: 0 0 0 0 var(--cob-key-edge), 0 1px 2px -1px oklch(21% 0.028 262 / 0.28), inset 0 1px 2px oklch(21% 0.028 262 / 0.14);
-      --cob-shadow-key-accent: 0 3px 0 0 var(--cob-accent-edge), 0 6px 8px -4px oklch(30% 0.12 260 / 0.45), inset 0 1px 0 oklch(100% 0 0 / 0.22);
-      --cob-shadow-key-accent-hover: 0 4px 0 0 var(--cob-accent-edge), 0 8px 10px -5px oklch(30% 0.12 260 / 0.45), inset 0 1px 0 oklch(100% 0 0 / 0.22);
-      --cob-shadow-key-accent-press: 0 0 0 0 var(--cob-accent-edge), 0 1px 2px -1px oklch(30% 0.12 260 / 0.45), inset 0 1px 3px oklch(21% 0.1 262 / 0.32);
-    }
-
-    body {
-      font-family: var(--cob-font-body) !important;
-      background: var(--cob-paper) !important;
-      color: var(--cob-ink) !important;
-    }
-
-    h1,
-    h2,
-    h3,
-    h4,
-    .crud-header h2,
-    .login-modal h2,
-    .delete-modal h2,
-    .wizard-page-title,
-    .kpi-value,
-    #printReport h1,
-    #printReport h2 {
-      font-family: var(--cob-font-display) !important;
-      font-weight: 600 !important;
-      letter-spacing: -0.028em !important;
-    }
-
-    code,
-    kbd,
-    .kpi-value {
-      font-family: var(--cob-font-mono);
-    }
-
-    ::selection {
-      background: var(--cob-accent-2);
-      color: var(--cob-ink);
-    }
-
-    .btn {
-      font-family: var(--cob-font-display);
-      font-weight: 600;
-      letter-spacing: -0.01em;
-      border-radius: var(--cob-radius-input);
-      background: var(--cob-face);
-      color: var(--cob-ink);
-      border: 1px solid var(--cob-rule-2);
-      box-shadow: var(--cob-shadow-key);
-      transition: transform 120ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 120ms cubic-bezier(0.16, 1, 0.3, 1), background-color 220ms cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .btn:hover {
-      box-shadow: var(--cob-shadow-key-hover);
-      transform: translateY(-1px);
-    }
-
-    .btn:active {
-      box-shadow: var(--cob-shadow-key-press);
-      transform: translateY(2px);
-    }
-
-    .btn-primary {
-      background: var(--cob-accent) !important;
-      color: var(--cob-face) !important;
-      border-color: var(--cob-accent-edge) !important;
-      box-shadow: var(--cob-shadow-key-accent) !important;
-    }
-
-    .btn-primary:hover {
-      background: var(--cob-accent-hover) !important;
-      box-shadow: var(--cob-shadow-key-accent-hover) !important;
-    }
-
-    .btn-primary:active {
-      box-shadow: var(--cob-shadow-key-accent-press) !important;
-    }
-
-    .btn-danger {
-      background: var(--cob-error) !important;
-      color: var(--cob-face) !important;
-      border-color: oklch(39% 0.15 27) !important;
-      box-shadow: 0 3px 0 0 oklch(39% 0.15 27), 0 6px 8px -4px oklch(30% 0.12 27 / 0.45), inset 0 1px 0 oklch(100% 0 0 / 0.22) !important;
-    }
-
-    .kpi,
-    .customer-table-panel,
-    .customer-filter-panel,
-    .mini-stat,
-    #printReport .pr-kpi {
-      border-radius: var(--cob-radius-card) !important;
-      border: 1px solid var(--cob-rule) !important;
-      background: var(--cob-face) !important;
-      box-shadow: var(--cob-shadow-card) !important;
-    }
-
-    .crud-modal,
-    .login-modal,
-    .delete-modal {
-      border-radius: var(--cob-radius-card) !important;
-      box-shadow: var(--cob-shadow-panel) !important;
-    }
-
-    input,
-    select,
-    textarea {
-      border-radius: var(--cob-radius-input) !important;
-    }
-
-    .crud-field input:focus,
-    .crud-field select:focus,
-    .crud-field textarea:focus,
-    .field input:focus,
-    .field select:focus,
-    .search input:focus,
-    .login-field input:focus {
-      border-color: var(--cob-accent) !important;
-      outline: 3px solid var(--cob-accent-wash) !important;
-      outline-offset: 0;
-    }
-
-    table th {
-      font-family: var(--cob-font-display);
-      letter-spacing: -0.01em;
-    }
-
-    .wizard-step.active {
-      background: var(--cob-accent) !important;
-      color: var(--cob-face) !important;
-    }
-
-    .wizard-step.done {
-      background: var(--cob-accent-wash) !important;
-      color: var(--cob-accent-deep) !important;
-    }
-
-    @supports (corner-shape: bevel) {
-
-      .btn,
-      .icon-btn,
-      .menu-btn {
-        border-radius: 8px 3px 8px 3px;
-        corner-shape: bevel round bevel round;
-      }
-
-      .kpi,
-      .customer-table-panel,
-      .customer-filter-panel,
-      .crud-modal,
-      .login-modal,
-      .delete-modal,
-      .mini-stat {
-        border-radius: 16px 4px 16px 4px;
-        corner-shape: bevel round bevel round;
-      }
-    }
-
-    /* Rapih ala Hallmark: isi div simple, tanpa kaki keterangan, label wajar */
-    .kpi-foot {
-      display: none !important;
-    }
-
-    html,
-    body {
-      overflow-x: clip;
-    }
-
-    th,
-    label,
-    .kpi-label,
-    .fg-badge,
-    .date-chip,
-    .wizard-step,
-    .mini-stat span,
-    .payment-metric span {
-      text-transform: none !important;
-      letter-spacing: normal !important;
-    }
-
-    :focus-visible {
-      outline: 2px solid var(--cob-accent);
-      outline-offset: 2px;
-    }
-
-    .panel {
-      padding: 20px;
-    }
-
-    .panel-head,
-    .table-head,
-    .section-title {
-      margin-bottom: 14px;
-    }
-
-    /* =============== /HALLMARK COBALT =============== */
+/* Rapih ala Hallmark: isi div simple, tanpa kaki keterangan, label wajar */
+.kpi-foot { display: none !important; }
+html, body { overflow-x: clip; }
+th, label, .kpi-label, .fg-badge, .date-chip, .wizard-step, .mini-stat span, .payment-metric span {
+  text-transform: none !important; letter-spacing: normal !important; }
+:focus-visible { outline: 2px solid var(--cob-accent); outline-offset: 2px; }
+.panel { padding: 20px; }
+.panel-head, .table-head, .section-title { margin-bottom: 14px; }
+/* =============== /HALLMARK COBALT =============== */
     /* === Responsif Android (konsolidasi) === */
     @media (max-width: 820px) {
-      .kpis {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .payment-overview {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .panel {
-        padding: 14px;
-      }
-
-      .top-actions {
-        gap: 8px;
-      }
-
-      .table-scroll {
-        -webkit-overflow-scrolling: touch;
-      }
+      .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .payment-overview { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .panel { padding: 14px; }
+      .top-actions { gap: 8px; }
+      .table-scroll { -webkit-overflow-scrolling: touch; }
     }
-
     @media (max-width: 640px) {
-      .filters {
-        grid-template-columns: 1fr;
-      }
-
-      .filter-actions {
-        grid-column: auto;
-      }
-
-      td,
-      th {
-        padding: 8px 10px;
-      }
+      .filters { grid-template-columns: 1fr; }
+      .filter-actions { grid-column: auto; }
+      td, th { padding: 8px 10px; }
     }
-
     @media (max-width: 560px) {
-      .crumb {
-        display: none;
-      }
-
-      .login-trigger {
-        padding: 0 10px;
-      }
+      .crumb { display: none; }
+      .login-trigger { padding: 0 10px; }
     }
-  </style>
+</style>
   <!-- Leaflet.js Interactive GIS Map -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <!-- SheetJS for real Excel .xlsx export -->
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.cdnfonts.com/css/google-sans" rel="stylesheet">
-</head>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.cdnfonts.com/css/google-sans" rel="stylesheet"></head>
 
 <body>
   <div class="app">
@@ -2382,25 +1825,13 @@
       <div class="nav-label">MENU UTAMA</div>
       <a class="nav-link active" href="#dashboard">
         <span class="nav-icon" style="display:flex;align-items:center;justify-content:center">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="3" width="7" height="7" />
-            <rect x="14" y="3" width="7" height="7" />
-            <rect x="14" y="14" width="7" height="7" />
-            <rect x="3" y="14" width="7" height="7" />
-          </svg>
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
         </span>
         Dashboard
       </a>
       <a class="nav-link" href="#pelanggan" id="customerNav">
         <span class="nav-icon" style="display:flex;align-items:center;justify-content:center">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round">
-            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-            <circle cx="9" cy="7" r="4" />
-            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-          </svg>
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </span>
         Manajemen Pelanggan <span class="lock-mark" id="customerLock">✓</span>
       </a>
@@ -2408,18 +1839,13 @@
     <main class="main">
       <header class="topbar">
         <div class="top-left"><button class="menu-btn" id="menuBtn" aria-label="Buka menu">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <line x1="3" y1="12" x2="21" y2="12" />
-              <line x1="3" y1="6" x2="21" y2="6" />
-              <line x1="3" y1="18" x2="21" y2="18" />
-            </svg>
-          </button>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
           <div class="crumb">Halaman / <strong>Dashboard</strong></div>
         </div>
         <div class="top-actions">
           <div class="profile">
-            <div class="avatar" style="background:oklch(95% 0.028 256);color:oklch(43% 0.2 262);font-weight:700">JC
-            </div>
+            <div class="avatar" style="background:oklch(95% 0.028 256);color:oklch(43% 0.2 262);font-weight:700">JC</div>
             <div class="profile-text"><strong>Administrator</strong><small>Super Admin · JACNET Sumedang</small></div>
           </div><button class="login-trigger" id="openLogin">Admin Aktif</button>
         </div>
@@ -2428,8 +1854,7 @@
         <div class="page-heading">
           <div>
             <h1>Ringkasan Dashboard</h1>
-            <p>Sistem Informasi Manajemen Pelanggan Retail & Tagihan Internet JACNET (PT Citra Nusantara Cyberindo -
-              Site Sumedang).</p>
+            <p>Sistem Informasi Manajemen Pelanggan Retail & Tagihan Internet JACNET (PT Citra Nusantara Cyberindo - Site Sumedang).</p>
           </div>
           <div class="date-chip" id="todayLabel">Memuat tanggal...</div>
         </div>
@@ -2459,10 +1884,7 @@
             <div class="kpi-top">
               <span class="kpi-label">Total Pendapatan</span>
               <span class="kpi-icon" style="background:oklch(95% 0.028 256);color:oklch(52% 0.19 258)">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-                  <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
-                  <polyline points="17 6 23 6 23 12" />
-                </svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
               </span>
             </div>
             <div class="kpi-value" id="revenue">Rp 572,9 jt</div>
@@ -2472,10 +1894,7 @@
             <div class="kpi-top">
               <span class="kpi-label">Total Pengeluaran</span>
               <span class="kpi-icon" style="background:oklch(96% 0.02 27);color:oklch(52% 0.19 27)">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-                  <polyline points="23 18 13.5 8.5 8.5 13.5 1 6" />
-                  <polyline points="17 18 23 18 23 12" />
-                </svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg>
               </span>
             </div>
             <div class="kpi-value" id="expense">Rp 143,2 jt</div>
@@ -2485,9 +1904,7 @@
             <div class="kpi-top">
               <span class="kpi-label">Pendapatan Bersih</span>
               <span class="kpi-icon" style="background:oklch(95% 0.03 155);color:oklch(50% 0.12 150)">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-                  <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-                </svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
               </span>
             </div>
             <div class="kpi-value" id="net">Rp 429,7 jt</div>
@@ -2497,12 +1914,7 @@
             <div class="kpi-top">
               <span class="kpi-label">Jumlah Client</span>
               <span class="kpi-icon" style="background:oklch(96% 0.035 85);color:oklch(62% 0.14 72)">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                  <circle cx="9" cy="7" r="4" />
-                  <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                </svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
               </span>
             </div>
             <div class="kpi-value" id="clients">793</div>
@@ -2512,10 +1924,7 @@
             <div class="kpi-top">
               <span class="kpi-label">Client Rumahan</span>
               <span class="kpi-icon" style="background:oklch(95% 0.028 256);color:oklch(43% 0.2 262)">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                  <polyline points="9 22 9 12 15 12 15 22" />
-                </svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
               </span>
             </div>
             <div class="kpi-value" id="homeClients">793</div>
@@ -2530,9 +1939,7 @@
               </div><span class="date-chip" id="mapBadge">793 pelanggan</span>
             </div>
             <div class="map-wrap" style="padding:0;overflow:hidden;border-radius:12px;background:oklch(95% 0.028 256)">
-              <div id="mapCluster"
-                style="width:100%;height:100%;border-radius:12px;position:relative;background:oklch(95% 0.028 256);z-index:1">
-              </div>
+              <div id="mapCluster" style="width:100%;height:100%;border-radius:12px;position:relative;background:oklch(95% 0.028 256);z-index:1"></div>
             </div>
           </article>
           <article class="panel">
@@ -2550,11 +1957,9 @@
         <section class="panel table-panel" id="transaksi">
           <div class="print-header">
             <h1 style="font-size:18px;margin:0;color:oklch(43% 0.2 262)">PT CITRA NUSANTARA CYBERINDO (JACNET)</h1>
-            <p style="font-size:12px;margin:3px 0;color:oklch(36% 0.022 260)">Laporan Data Pelanggan & 5 Transaksi
-              Terakhir (Site Sumedang / Jawa Barat)</p>
+            <p style="font-size:12px;margin:3px 0;color:oklch(36% 0.022 260)">Laporan Data Pelanggan & 5 Transaksi Terakhir (Site Sumedang / Jawa Barat)</p>
             <div style="font-size:12px;color:oklch(50% 0.018 258);margin-top:6px">
-              Tanggal Cetak: <span id="printDate"></span> | Filter: <span id="printFilter">Semua Wilayah</span> | Total
-              Terfilter: <span id="printCount"></span> Pelanggan
+              Tanggal Cetak: <span id="printDate"></span> | Filter: <span id="printFilter">Semua Wilayah</span> | Total Terfilter: <span id="printCount"></span> Pelanggan
             </div>
           </div>
           <div class="table-head">
@@ -2562,11 +1967,9 @@
               <h2>Data & 5 Transaksi Pelanggan Terakhir</h2>
             </div>
             <div class="table-tools">
-              <label class="rows-select"
-                style="font-size:12px;display:flex;align-items:center;gap:6px;color:oklch(36% 0.022 260);font-weight:600">
+              <label class="rows-select" style="font-size:12px;display:flex;align-items:center;gap:6px;color:oklch(36% 0.022 260);font-weight:600">
                 Tampilkan:
-                <select id="transactionPageSize"
-                  style="padding:5px 8px;border-radius:6px;border:1px solid oklch(83% 0.012 252);font-size:12px;background:oklch(99.4% 0.003 250)">
+                <select id="transactionPageSize" style="padding:5px 8px;border-radius:6px;border:1px solid oklch(83% 0.012 252);font-size:12px;background:oklch(99.4% 0.003 250)">
                   <option value="5" selected>5 data terakhir</option>
                   <option value="10">10 data</option>
                   <option value="25">25 data</option>
@@ -2576,8 +1979,7 @@
               </label>
               <div class="search"><span>⌕</span><input id="searchInput" type="search"
                   placeholder="Cari nama, ID, wilayah (Pamatang, dll), NIK, alamat..." /></div>
-              <button class="btn btn-primary" id="exportExcelBtn" title="Export Excel Spreadsheet (.xlsx)">Export
-                Excel</button>
+              <button class="btn btn-primary" id="exportExcelBtn" title="Export Excel Spreadsheet (.xlsx)">Export Excel</button>
               <button class="btn btn-light" id="exportPdfBtn" title="Cetak atau Simpan PDF Resmi">Cetak / PDF</button>
               <button class="btn btn-light" id="exportBtn" title="Unduh CSV">↓ CSV</button>
             </div>
@@ -2599,177 +2001,160 @@
           <div>
             <h1>Manajemen Pelanggan</h1>
           </div>
-          <div class="customer-actions"><button class="btn btn-light" id="exportCustomers">↓ Export
-              Excel</button><button class="btn btn-primary" id="addCustomer">+ Tambah Pelanggan</button></div>
+          <div class="customer-actions"><button class="btn btn-light" id="exportCustomers">↓ Export Excel</button><button
+              class="btn btn-primary" id="addCustomer">+ Tambah Pelanggan</button></div>
         </div>
 
         <div class="mgmt-layout">
           <div class="mgmt-main">
-            <div class="customer-stats">
-              <article class="panel mini-stat"><span>Total pelanggan</span><strong id="customerCount">3</strong>
-              </article>
-              <article class="panel mini-stat"><span>Pelanggan aktif</span><strong>2</strong></article>
-              <article class="panel mini-stat"><span>Dalam masa promo</span><strong>1</strong></article>
-              <article class="panel mini-stat"><span>Belum lunas registrasi</span><strong>1</strong></article>
-            </div>
+        <div class="customer-stats">
+          <article class="panel mini-stat"><span>Total pelanggan</span><strong id="customerCount">3</strong></article>
+          <article class="panel mini-stat"><span>Pelanggan aktif</span><strong>2</strong></article>
+          <article class="panel mini-stat"><span>Dalam masa promo</span><strong>1</strong></article>
+          <article class="panel mini-stat"><span>Belum lunas registrasi</span><strong>1</strong></article>
+        </div>
 
-            <div class="payment-overview">
-              <article class="panel payment-metric"><span>Uang Masuk (Periode Dipilih)</span><strong
-                  id="paymentCollected">Rp 0</strong></article>
-              <article class="panel payment-metric"><span>Tagihan Belum Lunas</span><strong
-                  id="paymentOutstanding">0</strong></article>
-              <article class="panel payment-metric"><span>Belum Ada Pembayaran</span><strong
-                  id="paymentUnpaid">0</strong>
-              </article>
-              <article class="panel payment-metric"><span>Total Pelanggan Terfilter</span><strong
-                  id="paymentTotalClients">0</strong>
-              </article>
+        <div class="payment-overview">
+          <article class="panel payment-metric"><span>Uang Masuk (Periode Dipilih)</span><strong
+              id="paymentCollected">Rp 0</strong></article>
+          <article class="panel payment-metric"><span>Tagihan Belum Lunas</span><strong
+              id="paymentOutstanding">0</strong></article>
+          <article class="panel payment-metric"><span>Belum Ada Pembayaran</span><strong id="paymentUnpaid">0</strong>
+          </article>
+          <article class="panel payment-metric"><span>Total Pelanggan Terfilter</span><strong id="paymentTotalClients">0</strong>
+          </article>
+        </div>
+        <section class="panel customer-table-panel">
+          <div class="table-head">
+            <div>
+              <h2>Data Pelanggan & Rekap Tagihan Bulanan</h2>
             </div>
-            <section class="panel customer-table-panel">
-              <div class="table-head">
-                <div>
-                  <h2>Data Pelanggan & Rekap Tagihan Bulanan</h2>
-                </div>
-                <div class="table-tools"><label class="rows-select">Tampilkan <select id="customerPageSize">
-                      <option>10</option>
-                      <option>25</option>
-                      <option>50</option>
-                    </select></label><span class="result-count" id="customerResultCount"></span></div>
-              </div>
-              <div class="table-scroll customer-table-scroll">
-                <table class="wide-customer-table">
-                  <thead id="customerTableHead"></thead>
-                  <tbody id="customerTableBody"></tbody>
-                </table>
-              </div>
-              <div class="table-foot"><span id="customerTableInfo">Memuat data pelanggan...</span>
-                <div class="pagination" id="customerPagination"></div>
-              </div>
-            </section>
+            <div class="table-tools"><label class="rows-select">Tampilkan <select id="customerPageSize">
+                  <option>10</option>
+                  <option>25</option>
+                  <option>50</option>
+                </select></label><span class="result-count" id="customerResultCount"></span></div>
+          </div>
+          <div class="table-scroll customer-table-scroll">
+            <table class="wide-customer-table">
+              <thead id="customerTableHead"></thead>
+              <tbody id="customerTableBody"></tbody>
+            </table>
+          </div>
+          <div class="table-foot"><span id="customerTableInfo">Memuat data pelanggan...</span>
+            <div class="pagination" id="customerPagination"></div>
+          </div>
+        </section>
           </div>
           <aside class="mgmt-side">
-            <section class="panel customer-filter-panel">
-              <div class="section-title">
-                <div>
-                  <h2>Filter Detail Pelanggan</h2>
-                </div><button class="btn btn-light" id="resetCustomerFilters">Reset Filter</button>
-              </div>
-              <div class="customer-filters">
-                <div class="filter-group" data-group="utama">
-                  <button type="button" class="filter-group-head"><span class="fg-title">Pencarian & Status</span><span
-                      class="fg-badge" style="display:none"></span><span class="fg-chev">▾</span></button>
-                  <div class="filter-group-body">
-                    <div class="field wide-search"><label for="customerSearch">PENCARIAN GLOBAL</label><input
-                        id="customerSearch" type="search"
-                        placeholder="Cari nama, ID, NIK, alamat, sales, nomor telepon, SSID, PPPoE..." /></div>
-                    <div class="field"><label for="filterCustomerStatus">STATUS PELANGGAN</label><select
-                        id="filterCustomerStatus">
-                        <option value="">Semua status</option>
-                        <option>Aktif</option>
-                        <option>Freeze</option>
-                        <option>Churn</option>
-                        <option>Dismantle</option>
-                      </select></div>
-                    <div class="field"><label for="filterCondition">KONDISI PERANGKAT</label><select
-                        id="filterCondition">
-                        <option value="">Semua kondisi perangkat</option>
-                        <option>Perangkat Belum Diambil</option>
-                        <option>Perangkat Sudah Diambil</option>
-                      </select></div>
-                    <div class="field"><label for="filterLifecycle">RIWAYAT STATUS</label><select id="filterLifecycle">
-                        <option value="">Semua riwayat</option>
-                        <option>Freeze</option>
-                        <option>Churn</option>
-                        <option>Dismantle</option>
-                      </select></div>
-                  </div>
-                </div>
-                <div class="filter-group collapsed" data-group="wilayah">
-                  <button type="button" class="filter-group-head"><span class="fg-title">Wilayah, Paket &
-                      Sales</span><span class="fg-badge" style="display:none"></span><span
-                      class="fg-chev">▾</span></button>
-                  <div class="filter-group-body">
-                    <div class="field"><label for="filterRegion">CLUSTER / WILAYAH</label><select id="filterRegion">
-                        <option value="">Semua cluster / wilayah</option>
-                      </select></div>
-                    <div class="field"><label for="filterPackage">NAMA PAKET</label><select id="filterPackage">
-                        <option value="">Semua paket</option>
-                      </select></div>
-                    <div class="field"><label for="filterBandwidth">BANDWIDTH</label><select id="filterBandwidth">
-                        <option value="">Semua bandwidth</option>
-                      </select></div>
-                    <div class="field"><label for="filterSales">NAMA SALES</label><input id="filterSales"
-                        list="salesList" placeholder="Cari sales..." /><datalist id="salesList"></datalist></div>
-                  </div>
-                </div>
-                <div class="filter-group collapsed" data-group="bayar">
-                  <button type="button" class="filter-group-head"><span class="fg-title">Pembayaran & Promo</span><span
-                      class="fg-badge" style="display:none"></span><span class="fg-chev">▾</span></button>
-                  <div class="filter-group-body">
-                    <div class="field"><label for="filterPaymentMonth">PERIODE REKAP PEMBAYARAN</label><select
-                        id="filterPaymentMonth">
-                        <option value="all" selected>Semua bulan</option>
-                        <option value="current">Bulan ini</option>
-                      </select></div>
-                    <div class="field"><label for="filterPaymentStatus">STATUS PEMBAYARAN</label><select
-                        id="filterPaymentStatus">
-                        <option value="">Semua pembayaran</option>
-                        <option value="Lunas">Sudah Lunas</option>
-                        <option value="Belum Lunas">Belum Lunas (bayar sebagian)</option>
-                        <option value="Belum Bayar">Belum Bayar (Rp0)</option>
-                      </select></div>
-                    <div class="field"><label for="filterRegStatus">STATUS BIAYA REGISTRASI</label><select
-                        id="filterRegStatus">
-                        <option value="">Semua status</option>
-                        <option>Lunas</option>
-                        <option>Belum Lunas</option>
-                      </select></div>
-                    <div class="field"><label for="filterPromo">PROMO KHUSUS</label><select id="filterPromo">
-                        <option value="">Semua promo</option>
-                        <option>Ya</option>
-                        <option>Tidak</option>
-                      </select></div>
-                  </div>
-                </div>
-                <div class="filter-group collapsed" data-group="detail">
-                  <button type="button" class="filter-group-head"><span class="fg-title">Tanggal & Detail
-                      Lainnya</span><span class="fg-badge" style="display:none"></span><span
-                      class="fg-chev">▾</span></button>
-                  <div class="filter-group-body">
-                    <div class="field"><label for="filterSOFrom">TANGGAL SO MULAI</label><input id="filterSOFrom"
-                        type="date" />
-                    </div>
-                    <div class="field"><label for="filterSOTo">TANGGAL SO AKHIR</label><input id="filterSOTo"
-                        type="date" />
-                    </div>
-                    <div class="field"><label for="filterSAFrom">TANGGAL SA MULAI</label><input id="filterSAFrom"
-                        type="date" />
-                    </div>
-                    <div class="field"><label for="filterSATo">TANGGAL SA AKHIR</label><input id="filterSATo"
-                        type="date" />
-                    </div>
-                    <div class="field"><label for="filterSurvey">HASIL SURVEY</label><select id="filterSurvey">
-                        <option value="">Semua hasil</option>
-                        <option>Lolos</option>
-                        <option>Menunggu konfirmasi</option>
-                        <option>Tidak Lolos</option>
-                      </select></div>
-                    <div class="field"><label for="filterMedia">MEDIA PERANGKAT</label><select id="filterMedia">
-                        <option value="">Semua media</option>
-                        <option>ONT</option>
-                        <option>Router</option>
-                        <option>Wireless CPE</option>
-                      </select></div>
-                    <div class="field"><label for="filterRW">RW</label><input id="filterRW"
-                        placeholder="Masukkan RW..." />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="filter-note">Pencarian mencakup seluruh kolom data pelanggan, termasuk NIK, koordinat, nomor
-                seri
-                perangkat, SSID, dan USER PPPOE.</div>
-            </section>
+        <section class="panel customer-filter-panel">
+          <div class="section-title">
+            <div>
+              <h2>Filter Detail Pelanggan</h2>
+            </div><button class="btn btn-light" id="resetCustomerFilters">Atur Ulang Filter</button>
+          </div>
+          <div class="customer-filters">
+            <div class="filter-group" data-group="utama">
+              <button type="button" class="filter-group-head"><span class="fg-title">Pencarian & Status</span><span class="fg-badge" style="display:none"></span><span class="fg-chev">▾</span></button>
+              <div class="filter-group-body">
+                            <div class="field wide-search"><label for="customerSearch">PENCARIAN GLOBAL</label><input
+                id="customerSearch" type="search"
+                placeholder="Cari nama, ID, NIK, alamat, sales, nomor telepon, SSID, PPPoE..." /></div>
+                            <div class="field"><label for="filterCustomerStatus">STATUS PELANGGAN</label><select
+                id="filterCustomerStatus">
+                <option value="">Semua status</option>
+                <option>Aktif</option>
+                <option>Freeze</option>
+                <option>Churn</option>
+                <option>Dismantle</option>
+              </select></div>
+                            <div class="field"><label for="filterCondition">KONDISI PERANGKAT</label><select id="filterCondition">
+                <option value="">Semua kondisi perangkat</option>
+                <option>Perangkat Belum Diambil</option>
+                <option>Perangkat Sudah Diambil</option>
+              </select></div>
+                            <div class="field"><label for="filterLifecycle">RIWAYAT STATUS</label><select id="filterLifecycle">
+                <option value="">Semua riwayat</option>
+                <option>Freeze</option>
+                <option>Churn</option>
+                <option>Dismantle</option>
+              </select></div>
+                          </div>
+            </div>
+            <div class="filter-group collapsed" data-group="wilayah">
+              <button type="button" class="filter-group-head"><span class="fg-title">Wilayah, Paket & Sales</span><span class="fg-badge" style="display:none"></span><span class="fg-chev">▾</span></button>
+              <div class="filter-group-body">
+                            <div class="field"><label for="filterRegion">CLUSTER / WILAYAH</label><select id="filterRegion">
+                <option value="">Semua cluster / wilayah</option>
+              </select></div>
+                            <div class="field"><label for="filterPackage">NAMA PAKET</label><select id="filterPackage">
+                <option value="">Semua paket</option>
+              </select></div>
+                            <div class="field"><label for="filterBandwidth">BANDWIDTH</label><select id="filterBandwidth">
+                <option value="">Semua bandwidth</option>
+              </select></div>
+                            <div class="field"><label for="filterSales">NAMA SALES</label><input id="filterSales" list="salesList"
+                placeholder="Cari sales..." /><datalist id="salesList"></datalist></div>
+                          </div>
+            </div>
+            <div class="filter-group collapsed" data-group="bayar">
+              <button type="button" class="filter-group-head"><span class="fg-title">Pembayaran & Promo</span><span class="fg-badge" style="display:none"></span><span class="fg-chev">▾</span></button>
+              <div class="filter-group-body">
+                            <div class="field"><label for="filterPaymentMonth">PERIODE REKAP PEMBAYARAN</label><select
+                id="filterPaymentMonth">
+                <option value="all" selected>Semua bulan</option>
+                <option value="current">Bulan ini</option>
+              </select></div>
+                            <div class="field"><label for="filterPaymentStatus">STATUS PEMBAYARAN</label><select
+                id="filterPaymentStatus">
+                <option value="">Semua pembayaran</option>
+                <option value="Lunas">Sudah Lunas</option>
+                <option value="Belum Lunas">Belum Lunas (bayar sebagian)</option>
+                <option value="Belum Bayar">Belum Bayar (Rp0)</option>
+              </select></div>
+                            <div class="field"><label for="filterRegStatus">STATUS BIAYA REGISTRASI</label><select id="filterRegStatus">
+                <option value="">Semua status</option>
+                <option>Lunas</option>
+                <option>Belum Lunas</option>
+              </select></div>
+                            <div class="field"><label for="filterPromo">PROMO KHUSUS</label><select id="filterPromo">
+                <option value="">Semua promo</option>
+                <option>Ya</option>
+                <option>Tidak</option>
+              </select></div>
+                          </div>
+            </div>
+            <div class="filter-group collapsed" data-group="detail">
+              <button type="button" class="filter-group-head"><span class="fg-title">Tanggal & Detail Lainnya</span><span class="fg-badge" style="display:none"></span><span class="fg-chev">▾</span></button>
+              <div class="filter-group-body">
+                            <div class="field"><label for="filterSOFrom">TANGGAL SO MULAI</label><input id="filterSOFrom" type="date" />
+            </div>
+                            <div class="field"><label for="filterSOTo">TANGGAL SO AKHIR</label><input id="filterSOTo" type="date" />
+            </div>
+                            <div class="field"><label for="filterSAFrom">TANGGAL SA MULAI</label><input id="filterSAFrom" type="date" />
+            </div>
+                            <div class="field"><label for="filterSATo">TANGGAL SA AKHIR</label><input id="filterSATo" type="date" />
+            </div>
+                            <div class="field"><label for="filterSurvey">HASIL SURVEY</label><select id="filterSurvey">
+                <option value="">Semua hasil</option>
+                <option>Lolos</option>
+                <option>Menunggu konfirmasi</option>
+                <option>Tidak Lolos</option>
+              </select></div>
+                            <div class="field"><label for="filterMedia">MEDIA PERANGKAT</label><select id="filterMedia">
+                <option value="">Semua media</option>
+                <option>ONT</option>
+                <option>Router</option>
+                <option>Wireless CPE</option>
+              </select></div>
+                            <div class="field"><label for="filterRW">RW</label><input id="filterRW" placeholder="Masukkan RW..." />
+            </div>
+                          </div>
+            </div>
+                      </div>
+          <div class="filter-note">Pencarian mencakup seluruh kolom data pelanggan, termasuk NIK, koordinat, nomor seri
+            perangkat, SSID, dan USER PPPOE.</div>
+        </section>
           </aside>
         </div>
 
@@ -2782,8 +2167,7 @@
   <div class="crud-overlay" id="customerCrudOverlay" aria-hidden="true">
     <section class="crud-modal" role="dialog" aria-modal="true" aria-labelledby="crudTitle">
       <header class="crud-header">
-        <div>
-          <h2 id="crudTitle">Tambah Pelanggan</h2>
+        <div><h2 id="crudTitle">Tambah Pelanggan</h2>
         </div>
         <button type="button" class="crud-close" id="closeCustomerCrud" aria-label="Tutup">×</button>
       </header>
@@ -2824,12 +2208,7 @@
         <div class="login-field"><label for="adminPassword">Kata Sandi</label>
           <div class="password-wrap"><input id="adminPassword" type="password" value="admin123"
               placeholder="Masukkan kata sandi" autocomplete="current-password" required><button type="button"
-              class="toggle-password" id="togglePassword" aria-label="Tampilkan kata sandi"><svg width="16" height="16"
-                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round">
-                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                <circle cx="12" cy="12" r="3" />
-              </svg></button></div>
+              class="toggle-password" id="togglePassword" aria-label="Tampilkan kata sandi"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
         </div>
         <div class="login-options"><label class="remember"><input type="checkbox" id="rememberAdmin" checked> Ingat
             saya</label></div>
@@ -2843,8 +2222,7 @@
     <section class="login-modal" style="width:min(100%, 480px)">
       <button class="login-close" id="closeDbConfig" aria-label="Tutup">×</button>
       <div class="login-brand">
-        <div class="brand-mark" style="background:linear-gradient(135deg, oklch(50% 0.12 150), oklch(40% 0.11 150))">DB
-        </div>
+        <div class="brand-mark" style="background:linear-gradient(135deg, oklch(50% 0.12 150), oklch(40% 0.11 150))">DB</div>
         <div><strong>Koneksi Database</strong>
         </div>
       </div>
@@ -3145,7 +2523,7 @@
       const start = (page - 1) * effectiveSize;
       const items = displayRows.slice(start, start + effectiveSize);
       const body = document.getElementById('transactionRows');
-
+      
       if (!body) return;
 
       body.innerHTML = items.length ? items.map((r, i) => {
@@ -3168,7 +2546,7 @@
           <td>${safeCrudText(r[5])}</td>
           <td><strong>${safeCrudText(r[6])}</strong></td>
           <td>${safeCrudText(r[7])}</td>
-          <td><div class="customer"><div class="mini-avatar">${String(r[8] || 'CL').split(' ').map(x => x[0]).filter(Boolean).slice(0, 2).join('')}</div><div><strong>${safeCrudText(r[8])}</strong></div></div></td>
+          <td><div class="customer"><div class="mini-avatar">${String(r[8]||'CL').split(' ').map(x=>x[0]).filter(Boolean).slice(0,2).join('')}</div><div><strong>${safeCrudText(r[8])}</strong></div></div></td>
           <td title="${safeCrudText(r[9])}">${safeCrudText(r[9])}</td>
           <td>${safeCrudText(r[10])}</td>
           <td><strong>${safeCrudText(r[11])}</strong></td>
@@ -3210,8 +2588,8 @@
       }).join('') : `<tr><td colspan="46" class="empty">Tidak ada data pelanggan yang cocok dengan filter.</td></tr>`;
 
       const totalLen = displayRows.length;
-      document.getElementById('tableInfo').textContent = totalLen
-        ? `Menampilkan ${(start + 1).toLocaleString('id-ID')}–${Math.min(start + effectiveSize, totalLen).toLocaleString('id-ID')} dari ${totalLen.toLocaleString('id-ID')} data (${effectiveSize >= totalLen ? 'Semua Data' : effectiveSize.toLocaleString('id-ID') + ' Data Terakhir'})`
+      document.getElementById('tableInfo').textContent = totalLen 
+        ? `Menampilkan ${(start + 1).toLocaleString('id-ID')}–${Math.min(start + effectiveSize, totalLen).toLocaleString('id-ID')} dari ${totalLen.toLocaleString('id-ID')} data (${effectiveSize >= totalLen ? 'Semua Data' : effectiveSize.toLocaleString('id-ID') + ' Data Terakhir'})` 
         : 'Tidak ada data';
       const pages = Math.max(1, Math.ceil(totalLen / effectiveSize));
       const maxButtons = 7;
@@ -3274,8 +2652,8 @@
         // Wilayah = cluster domisili dari awalan ID pelanggan (PMT, CKL, CJK, dst.);
         // ID lama yang awalannya tidak dikenal dideteksi dari alamat (aturan yang sama dengan form).
         const matchRegion = (region === 'all' || rowClusterLabel(r) === region);
-
-        const matchBand = (band === 'all' || String(r[14] || '').toLowerCase() === band.toLowerCase() || String(r[14] || '').toLowerCase().includes(band.toLowerCase()));
+        
+        const matchBand = (band === 'all' || String(r[14]||'').toLowerCase() === band.toLowerCase() || String(r[14]||'').toLowerCase().includes(band.toLowerCase()));
         const matchCust = (custStatus === 'all' || r[22] === custStatus || (custStatus === 'Menunggak' && r[45] === 'Belum Lunas') || (custStatus === 'Nonaktif' && r[22] !== 'Aktif'));
         const matchSearch = !search || r.join(' ').toLowerCase().includes(search);
         const matchEmpty = dashEmptyCol === null || isEmptyVal(r[dashEmptyCol]);
@@ -3549,7 +2927,7 @@
         showToast('Filter kolom kosong aktif: ' + nm + ' — ' + customerFiltered.length.toLocaleString('id-ID') + ' data. Klik header yang sama untuk mematikan.');
       }
     });
-    document.getElementById('resetCustomerFilters').onclick = () => { custEmptyCol = null;['customerSearch', 'filterCustomerStatus', 'filterCondition', 'filterPaymentMonth', 'filterPaymentStatus', 'filterRegion', 'filterPackage', 'filterSales', 'filterPromo', 'filterRegStatus', 'filterSOFrom', 'filterSOTo', 'filterBandwidth', 'filterSAFrom', 'filterSATo', 'filterLifecycle', 'filterSurvey', 'filterMedia', 'filterRW'].forEach(id => document.getElementById(id).value = ''); document.getElementById('filterPaymentMonth').value = 'current'; applyCustomerFilters() };
+    document.getElementById('resetCustomerFilters').onclick = () => { custEmptyCol = null; ['customerSearch', 'filterCustomerStatus', 'filterCondition', 'filterPaymentMonth', 'filterPaymentStatus', 'filterRegion', 'filterPackage', 'filterSales', 'filterPromo', 'filterRegStatus', 'filterSOFrom', 'filterSOTo', 'filterBandwidth', 'filterSAFrom', 'filterSATo', 'filterLifecycle', 'filterSurvey', 'filterMedia', 'filterRW'].forEach(id => document.getElementById(id).value = ''); document.getElementById('filterPaymentMonth').value = 'current'; applyCustomerFilters() };
     // ===== Grup filter manajemen: buka/tutup + lencana jumlah filter aktif =====
     const FILTER_GROUPS = {
       utama: ['customerSearch', 'filterCustomerStatus', 'filterCondition', 'filterLifecycle'],
@@ -3983,7 +3361,7 @@
       if (regionFilterEl) {
         const currentVal = regionFilterEl.value;
         const sortedRegions = Object.keys(regionStats).sort((a, b) => a.localeCompare('id'));
-
+        
         let optHtml = `<option value="all">Semua wilayah (${customerRows.length} pelanggan)</option>`;
         sortedRegions.forEach(reg => {
           optHtml += `<option value="${reg}">${reg} (${regionStats[reg].count} pelanggan)</option>`;
@@ -4000,7 +3378,7 @@
       if (bandFilterEl && packageSet.size > 0) {
         const currentBand = bandFilterEl.value;
         const sortedPkgs = Array.from(packageSet).filter(p => String(p).trim().toLowerCase() !== 'silver').sort(paketSort);
-        bandFilterEl.innerHTML = '<option value="all">Semua paket</option>' +
+        bandFilterEl.innerHTML = '<option value="all">Semua paket</option>' + 
           sortedPkgs.map(p => `<option value="${p}">${p}</option>`).join('');
         if (sortedPkgs.includes(currentBand)) bandFilterEl.value = currentBand;
       }
@@ -4619,7 +3997,7 @@
           const pay = b[6 + m];
           if (pay && typeof pay === 'object') {
             const paidVal = Number(pay.paid || 0);
-            monthlyRevs[m] += Number.isFinite(paidVal) ? paidVal : 0;
+          monthlyRevs[m] += Number.isFinite(paidVal) ? paidVal : 0;
           }
         }
       });
@@ -4725,44 +4103,26 @@
     document.getElementById('chartMode').onchange = drawChart; let resizeRedrawT; window.addEventListener('resize', () => { clearTimeout(resizeRedrawT); resizeRedrawT = setTimeout(() => { drawChart(); refitMapCluster(); }, 200); }); renderTable(); requestAnimationFrame(drawChart);
   </script>
   <div class="crud-overlay" id="coordPickerOverlay" aria-hidden="true" style="z-index:1300">
-    <div
-      style="background:oklch(99.4% 0.003 250);border-radius:14px;width:min(640px,100%);padding:18px;box-shadow:0 20px 50px oklch(21% 0.028 262 / .3)">
+    <div style="background:oklch(99.4% 0.003 250);border-radius:14px;width:min(640px,100%);padding:18px;box-shadow:0 20px 50px oklch(21% 0.028 262 / .3)">
       <h3 style="margin:0 0 6px;font-size:16px;color:oklch(43% 0.2 262)">Pilih Titik Koordinat Pelanggan</h3>
-      <p style="margin:0 0 10px;font-size:12px;color:oklch(50% 0.018 258)">Koordinat terpilih: <b
-          id="coordPickerValue">-</b></p>
+      <p style="margin:0 0 10px;font-size:12px;color:oklch(50% 0.018 258)">Koordinat terpilih: <b id="coordPickerValue">-</b></p>
       <div id="coordPickerMap" style="width:100%;height:340px;border-radius:10px;background:oklch(95% 0.028 256)"></div>
       <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:12px">
-        <button type="button" onclick="closeCoordPicker()"
-          style="padding:8px 14px;font-size:13px;background:oklch(95% 0.028 256);color:oklch(21% 0.028 262);border:1px solid oklch(83% 0.012 252);border-radius:8px;cursor:pointer;font-weight:600">Batal</button>
-        <button type="button" onclick="saveCoordPicker()"
-          style="padding:8px 14px;font-size:13px;background:oklch(52% 0.19 258);color:oklch(99.4% 0.003 250);border:none;border-radius:8px;cursor:pointer;font-weight:600">Pakai
-          Koordinat Ini</button>
+        <button type="button" onclick="closeCoordPicker()" style="padding:8px 14px;font-size:13px;background:oklch(95% 0.028 256);color:oklch(21% 0.028 262);border:1px solid oklch(83% 0.012 252);border-radius:8px;cursor:pointer;font-weight:600">Batal</button>
+        <button type="button" onclick="saveCoordPicker()" style="padding:8px 14px;font-size:13px;background:oklch(52% 0.19 258);color:oklch(99.4% 0.003 250);border:none;border-radius:8px;cursor:pointer;font-weight:600">Pakai Koordinat Ini</button>
       </div>
     </div>
   </div>
 
   <div id="printReport">
     <div class="ir-title" id="printReportTitle">DAFTAR IURAN INTERNET JAC WIFI</div>
-    <div class="ir-sub"><span>AREA : <strong id="irArea">SEMUA WILAYAH</strong></span><span>Bulan : <strong
-          id="irMonth">-</strong></span><span>Update : <strong id="irUpdate">-</strong></span></div>
+    <div class="ir-sub"><span>AREA : <strong id="irArea">SEMUA WILAYAH</strong></span><span>Bulan : <strong id="irMonth">-</strong></span><span>Update : <strong id="irUpdate">-</strong></span></div>
     <table class="ir-table">
-      <thead>
-        <tr>
-          <th>NO</th>
-          <th>NAMA</th>
-          <th>USERNAME</th>
-          <th>PAKET</th>
-          <th>TAGIHAN</th>
-          <th id="irMonthHead">BULAN</th>
-          <th>KET</th>
-          <th>REV</th>
-        </tr>
-      </thead>
+      <thead><tr><th>NO</th><th>NAMA</th><th>USERNAME</th><th>PAKET</th><th>TAGIHAN</th><th id="irMonthHead">BULAN</th><th>KET</th><th>REV</th></tr></thead>
       <tbody id="irBody"></tbody>
       <tfoot id="irFoot"></tfoot>
     </table>
-    <div class="pr-foot">Dokumen ini dihasilkan otomatis dari Dashboard Admin JACNET · Sumber data: Google Sheet
-      DATABASE JACNET (PT Citra Nusantara Cyberindo — Site Sumedang).</div>
+    <div class="pr-foot">Dokumen ini dihasilkan otomatis dari Dashboard Admin JACNET · Sumber data: Google Sheet DATABASE JACNET (PT Citra Nusantara Cyberindo — Site Sumedang).</div>
   </div>
 </body>
 
