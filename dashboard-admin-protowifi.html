@@ -2067,7 +2067,7 @@ th, label, .kpi-label, .fg-badge, .date-chip, .wizard-step, .mini-stat span, .pa
         </div>
 
         <div class="payment-overview">
-          <article class="panel payment-metric"><span>Uang Masuk (Periode Dipilih)</span><strong
+          <article class="panel payment-metric"><span id="paymentCollectedLabel">Uang Masuk</span><strong
               id="paymentCollected">Rp 0</strong></article>
           <article class="panel payment-metric"><span>Tagihan Belum Lunas</span><strong
               id="paymentOutstanding">0</strong></article>
@@ -2923,10 +2923,10 @@ th, label, .kpi-label, .fg-badge, .date-chip, .wizard-step, .mini-stat span, .pa
       const pages = Math.max(1, Math.ceil(customerFiltered.length / size) || 1);
       document.getElementById('customerTableInfo').textContent = customerFiltered.length ? `Menampilkan ${(start + 1).toLocaleString('id-ID')}–${Math.min(start + size, customerFiltered.length).toLocaleString('id-ID')} dari ${customerFiltered.length.toLocaleString('id-ID')} pelanggan` : 'Tidak ada pelanggan';
       document.getElementById('customerResultCount').textContent = customerFiltered.length.toLocaleString('id-ID') + ' data';
-      document.getElementById('customerCount').textContent = customerRows.length.toLocaleString('id-ID');
-      document.querySelector('.customer-stats .mini-stat:nth-child(2) strong').textContent = customerRows.filter(r => r[22] === 'Aktif').length.toLocaleString('id-ID');
-      document.querySelector('.customer-stats .mini-stat:nth-child(3) strong').textContent = customerRows.filter(r => r[19] === 'Ya').length.toLocaleString('id-ID');
-      document.querySelector('.customer-stats .mini-stat:nth-child(4) strong').textContent = customerRows.filter(r => r[45] === 'Belum Lunas').length.toLocaleString('id-ID');
+      document.getElementById('customerCount').textContent = customerFiltered.length.toLocaleString('id-ID');
+      document.querySelector('.customer-stats .mini-stat:nth-child(2) strong').textContent = customerFiltered.filter(r => r[22] === 'Aktif').length.toLocaleString('id-ID');
+      document.querySelector('.customer-stats .mini-stat:nth-child(3) strong').textContent = customerFiltered.filter(r => r[19] === 'Ya').length.toLocaleString('id-ID');
+      document.querySelector('.customer-stats .mini-stat:nth-child(4) strong').textContent = customerFiltered.filter(r => r[45] === 'Belum Lunas').length.toLocaleString('id-ID');
       const maxButtons = 7;
       let startP = Math.max(1, customerPage - 3);
       let endP = Math.min(pages, startP + maxButtons - 1);
@@ -2966,17 +2966,26 @@ th, label, .kpi-label, .fg-badge, .date-chip, .wizard-step, .mini-stat span, .pa
           return payment && (!period.year || !payment.year || Number(payment.year) === period.year) ? payment : null;
         }).filter(Boolean) : [];
         const paymentMatch = !paymentStatus || payments.some(payment => payment.status === paymentStatus);
-        collected += payments.reduce((sum, payment) => sum + Number(payment.paid || 0), 0);
-        if (payments.some(payment => payment.status === 'Belum Lunas')) outstanding++;
-        if (payments.some(payment => payment.status === 'Belum Bayar')) unpaid++;
         let emptyMatch = true;
         if (custEmptyCol !== null) {
           if (custEmptyCol < 47) emptyMatch = isEmptyVal(r[custEmptyCol]);
           else if (custEmptyCol < 50) emptyMatch = isEmptyVal(bill ? bill[custEmptyCol - 44] : '');
           else { const pm = paymentPeriods[custEmptyCol - 50]; emptyMatch = !(bill && pm && bill[6 + pm.month]); }
         }
-        return (!q || all.includes(q)) && (!status || r[22] === status) && (!condition || r[23] === condition) && (!region || rowClusterLabel(r) === region) && (!pack || r[14] === pack) && (!sales || r[5].toLowerCase().includes(sales)) && (!promo || (promo === 'Ya' ? r[19] === 'Ya' : r[19] !== 'Ya')) && (!reg || r[45] === reg) && (!from || r[3] >= from) && (!to || r[3] <= to) && (!bw || r[15] === bw) && (!saFrom || r[18] >= saFrom) && (!saTo || r[18] <= saTo) && lifecycleMatch && (!survey || r[35] === survey) && (!media || r[38] === media) && (!rw || r[10].toLowerCase().includes(rw)) && (!paymentStatus || paymentMatch) && emptyMatch;
+        const pass = (!q || all.includes(q)) && (!status || r[22] === status) && (!condition || r[23] === condition) && (!region || rowClusterLabel(r) === region) && (!pack || r[14] === pack) && (!sales || r[5].toLowerCase().includes(sales)) && (!promo || (promo === 'Ya' ? r[19] === 'Ya' : r[19] !== 'Ya')) && (!reg || r[45] === reg) && (!from || r[3] >= from) && (!to || r[3] <= to) && (!bw || r[15] === bw) && (!saFrom || r[18] >= saFrom) && (!saTo || r[18] <= saTo) && lifecycleMatch && (!survey || r[35] === survey) && (!media || r[38] === media) && (!rw || r[10].toLowerCase().includes(rw)) && (!paymentStatus || paymentMatch) && emptyMatch;
+        // Kartu pembayaran hanya menjumlah baris yang lolos filter (sebelumnya semua baris ikut terhitung)
+        if (pass) {
+          collected += payments.reduce((sum, payment) => sum + Number(payment.paid || 0), 0);
+          if (payments.some(payment => payment.status === 'Belum Lunas')) outstanding++;
+          if (payments.some(payment => payment.status === 'Belum Bayar')) unpaid++;
+        }
+        return pass;
       });
+      // Judul kartu Uang Masuk mengikuti periode pembayaran terpilih (dinamis, bukan teks tetap)
+      const collectedLabel = document.getElementById('paymentCollectedLabel');
+      if (collectedLabel) {
+        collectedLabel.textContent = 'Uang Masuk (' + (paymentPeriods.length === 1 ? paymentPeriods[0].label : paymentPeriods[0].label + ' – ' + paymentPeriods[paymentPeriods.length - 1].label) + ')';
+      }
       document.getElementById('paymentCollected').textContent = 'Rp ' + collected.toLocaleString('id-ID');
       document.getElementById('paymentOutstanding').textContent = outstanding.toLocaleString('id-ID');
       document.getElementById('paymentUnpaid').textContent = unpaid.toLocaleString('id-ID');
